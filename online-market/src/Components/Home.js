@@ -33,7 +33,7 @@ export class Home extends React.Component {
                         <img src={logo} />
                         <p>{product.model}</p> 
                         <p>{product.brand}</p>                        
-                    <b>{product.price}</b>
+                    <b>{product.price}</b> <br/>
                     <button className="btn btn-primary">Add to cart</button>
                 </div>
             </div>
