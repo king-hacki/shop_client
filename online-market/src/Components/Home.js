@@ -27,6 +27,7 @@ export class Home extends React.Component {
 
 
     render() {
+        console.log(this.props.user)
         const productItems = this.state.items.map(product => (
             <div className="col-sm-4" key={product.id}>
                 <div className="thumbnail text-center">
@@ -53,6 +54,7 @@ export class Home extends React.Component {
 
 
 const mapStateToProps = state => ({
+    user: state.userReducer,
     items: state.productReducer.items
 });
 

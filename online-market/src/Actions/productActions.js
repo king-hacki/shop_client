@@ -7,9 +7,11 @@ import {
     UPDATE_ITEM
 } from './types';
 
+import {tokenConfig} from './userActions';
+
 export const getItems = () => (dispatch, getState) => {
     axios
-        .get('http://localhost:8080/api/mobilePhone')
+        .get('http://localhost:8080/api/mobilePhone', tokenConfig(getState))
         .then(res => {
             console.log(res)
             dispatch({

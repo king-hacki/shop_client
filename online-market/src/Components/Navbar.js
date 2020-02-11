@@ -39,7 +39,7 @@ render() {
               <MDBNavLink to="#">Logout</MDBNavLink>
             </MDBNavItem>
               <MDBNavItem>
-              <MDBNavLink to="#!"><MDBIcon icon="user" /></MDBNavLink>
+              <MDBNavLink to="/profile"><MDBIcon icon="user" /></MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>

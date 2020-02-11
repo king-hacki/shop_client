@@ -3,7 +3,7 @@ export const DELETE_ITEM = "DELETE_ITEM";
 export const CREATE_ITEM = "CREATE_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
 
-export const USER_LOADIN = "USER_LOADING";
+export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 
