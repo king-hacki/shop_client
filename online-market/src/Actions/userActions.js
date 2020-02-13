@@ -98,6 +98,13 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
 }
 
 
+    export const logout = () => dispatch => {
+        dispatch({
+        type: LOGOUT_SUCCESS
+        });
+    };
+
+
     export const getAllUsers = () => (dispatch, getState) => {
         axios
             .get('http://localhost:8080/api/auth/allUsers', tokenConfig(getState))
