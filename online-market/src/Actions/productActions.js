@@ -8,6 +8,7 @@ import {
 } from './types';
 
 import {tokenConfig} from './userActions';
+import { toast } from "react-toastify";
 
 export const getItems = () => (dispatch, getState) => {
     axios
@@ -20,3 +21,23 @@ export const getItems = () => (dispatch, getState) => {
             })
         })
 };
+
+export const createItem = (mobileIdentifier, brand, model, graduationYear, price) => (dispatch, getState) => {
+    
+    const body = JSON.stringify({mobileIdentifier,brand,model,graduationYear,price});
+
+    console.log(mobileIdentifier)
+
+    axios
+        .post('http://localhost:8080/api/mobilePhone/createItem', body, tokenConfig(getState))
+        .then(res => {
+            console.log(res)
+            toast.success("Item created and saved to database",{
+                position: toast.POSITION.TOP_RIGHT
+            })
+            dispatch({
+                type: CREATE_ITEM,
+                payload: res.data
+            })
+        })
+}

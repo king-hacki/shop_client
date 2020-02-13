@@ -3,7 +3,6 @@ import axios from 'axios'
 import {
   USER_LOADED,
   USER_LOADING,
-  GET_ERRORS,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   AUTH_ERROR,
@@ -11,7 +10,10 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   INVALID_TOKEN,
+  GET_ALL_USERS,
 } from './types'
+
+import { toast } from 'react-toastify';
 
 export const loadUser = () => (dispatch, getState) => {
     dispatch({type: USER_LOADING});
@@ -58,16 +60,22 @@ export const loginUser = (username,password) => dispatch => {
             dispatch(loadUser())
             console.log(res.data)
         })
+        .catch(err => {
+            toast.error(JSON.stringify("Invalid password or login"))
+            dispatch({
+                type: LOGIN_FAIL
+            })
+        })
 }
 
-export const registerUser = ({username, email, password}) => dispatch => {
+export const registerUser = ({username,firstName, lastName, email, password}) => dispatch => {
     const config = {
             headers : {
             "Content-Type" : "application/json"
         }
     };
 
-    const body = JSON.stringify({username, email, password});
+    const body = JSON.stringify({username,firstName, lastName, email, password});
 
     axios
         .post("http://localhost:8080/api/auth/signUp", body, config)
@@ -77,11 +85,29 @@ export const registerUser = ({username, email, password}) => dispatch => {
                 payload: res.data
             });
         })
-
         .catch(err =>{
-            // dispatch(returnsErrors)
+            Object.values(err.response.data).map(message => {
+                toast.error(message , {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            });
+            dispatch({
+                type: REGISTER_FAIL
+            })
         })
 }
+
+
+    export const getAllUsers = () => (dispatch, getState) => {
+        axios
+            .get('http://localhost:8080/api/auth/allUsers', tokenConfig(getState))
+            .then(res => {
+               dispatch({
+                   type: GET_ALL_USERS,
+                   payload: res.data
+               })
+            })
+    }
 
     export const tokenConfig = getState => {
         const accessToken = getState().userReducer.accessToken;

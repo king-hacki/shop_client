@@ -8,6 +8,8 @@ import {registerUser} from '../Actions/userActions'
 export class Register extends Component {
     state = {
         email : "",
+        firstName: "",
+        lastName: "",
         password : "",
         username : ""
     }
@@ -19,10 +21,12 @@ export class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const {email, password, username} = this.state;
+        const {email, firstName, lastName ,password, username} = this.state;
         
         const newUser = {
             email,
+            firstName,
+            lastName,
             username,
             password
         }
@@ -38,7 +42,7 @@ export class Register extends Component {
         if(this.props.user_registered){
             return <Redirect to="/login" />;
         }
-        const { email,username, password } = this.state;
+        const { email,firstName, lastName ,username, password } = this.state;
             return (
                 <div className="col-md-6 m-auto">
                   <div className="card card-body mt-5">
@@ -53,6 +57,26 @@ export class Register extends Component {
                           onChange={this.onChange}
                           value={username}
                         />
+                      </div>
+                      <div className="form-group">
+                        <label>first-Name</label>
+                        <input
+                          type="firstName"
+                          className="form-control"
+                          name="firstName"
+                          onChange={this.onChange}
+                          value={firstName}
+                          />
+                      </div>
+                      <div className="form-group">
+                        <label>last-Name</label>
+                        <input
+                          type="lastName"
+                          className="form-control"
+                          name="lastName"
+                          onChange={this.onChange}
+                          value={lastName}
+                          />
                       </div>
                       <div className="form-group">
                         <label>Email</label>
@@ -91,7 +115,7 @@ export class Register extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.userReducer.isAuthenticated,
-    userRegistered: state.userReducer.userRegistered
+    userRegistered: state.userReducer.userRegistered,
 })
 
 export default connect(mapStateToProps, {registerUser}) (Register);

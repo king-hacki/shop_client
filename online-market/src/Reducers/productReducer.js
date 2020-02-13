@@ -1,4 +1,4 @@
-import { GET_ALL_ITEMS } from "../Actions/types";
+import { GET_ALL_ITEMS, CREATE_ITEM } from "../Actions/types";
 
 const initState = {
     items: [],
@@ -14,6 +14,12 @@ export default function(state = initState, action){
             return{
                 ...state,
                 items: action.payload
+            }
+        case CREATE_ITEM:
+            console.log(action.payload)
+            return{
+                ...state,
+                addedItems: action.payload
             }
         default:
             return state;

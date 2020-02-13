@@ -11,10 +11,16 @@ class Profile extends Component {
     render(){
         console.log("PREVIT")
         return(
-            <div>
-                <h1>Profile</h1>
-                <p>{this.props.user.username}</p>
-                <p>{this.props.user.email}</p>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-centered">
+                        <h1>Profile</h1>        
+                        <p>{this.props.user.username}</p>
+                        <p>{this.props.user.firstName}</p>
+                        <p>{this.props.user.lastName}</p>
+                        <p>{this.props.user.email}</p>
+                    </div>
+                </div>
             </div>
         )
     }

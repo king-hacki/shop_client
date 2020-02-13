@@ -6,7 +6,6 @@ import logo from '../iphone-11-(bl)-350x350.jpg'
 
 
 
-
 export class Home extends React.Component {
     
     state = {
@@ -27,7 +26,6 @@ export class Home extends React.Component {
 
 
     render() {
-        console.log(this.props.user)
         const productItems = this.state.items.map(product => (
             <div className="col-sm-4" key={product.id}>
                 <div className="thumbnail text-center">

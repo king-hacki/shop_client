@@ -7,6 +7,7 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    GET_ALL_USERS
 } from "../Actions/types"
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     isAuthenticated: false,
     userRegistered: false,
     role: "user",
-    user: null
+    user: null,
+    users: []
 }
 
 
@@ -30,7 +32,8 @@ export default function(state = initialState, action){
                 ...state,
                 ...action.payload,
                 accessToken: action.payload.token,
-                isAuthenticated: true
+                isAuthenticated: true,
+                role: action.payload.roles[0]
             }
         case USER_LOADING:
             return {
@@ -43,7 +46,20 @@ export default function(state = initialState, action){
                 isAuthenticated: true,
                 isLoading: false,
                 user: action.payload
-            }        
+            }       
+        case REGISTER_SUCCESS:
+            return{
+                ...state,
+                ...action.payload,
+                userRegistered: true,
+                isLoading: false
+            } 
+        case GET_ALL_USERS:
+            console.log(action.payload)
+            return{
+                ...state,
+                users: action.payload
+            }
         case LOGIN_FAIL:
         case AUTH_ERROR:
         case LOGOUT_SUCCESS:
