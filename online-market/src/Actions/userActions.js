@@ -13,6 +13,8 @@ import {
   GET_ALL_USERS,
 } from './types'
 
+import {getShoppingCart} from './cartActions'
+
 import { toast } from 'react-toastify';
 
 export const loadUser = () => (dispatch, getState) => {
@@ -58,6 +60,7 @@ export const loginUser = (username,password) => dispatch => {
                 payload: res.data   
             })
             dispatch(loadUser())
+            dispatch(getShoppingCart())
             console.log(res.data)
         })
         .catch(err => {
@@ -80,6 +83,7 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
     axios
         .post("http://localhost:8080/api/auth/signUp", body, config)
         .then(res => {
+            toast.success("You registered successfully");
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
@@ -109,6 +113,7 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
         axios
             .get('http://localhost:8080/api/auth/allUsers', tokenConfig(getState))
             .then(res => {
+                console.log(res)
                dispatch({
                    type: GET_ALL_USERS,
                    payload: res.data

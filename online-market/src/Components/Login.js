@@ -8,6 +8,13 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
+import { Button, Header, Message,Input,Form, Grid, Segment} from 'semantic-ui-react'
+
+import "semantic-ui-css/semantic.min.css";
+
+
+import "../App.css";
+
 class Login extends React.Component {
     state = {           
         username: "",
@@ -21,57 +28,48 @@ class Login extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
+        console.log(this.state)
         this.props.loginUser(this.state.username, this.state.password);
     }
 
-    onChange = e => this.setState({
+    onChange = e =>{
+      console.log(e.target.name)
+       this.setState({
         [e.target.name] : e.target.value
     });
+  }
 
     render(){
         if(this.props.isAuthenticated){
             return <Redirect to="/home" />;
         }
-        const {username, password} = this.state;
         return (
-            <div className="col-md-6 m-auto">
-        <div className="card card-body mt-5">
-          <h2 className="text-center">Login</h2>
-          <form onSubmit={this.onSubmit}>
-           
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="username"
-                className="form-control"
-                name="username"
-                onChange={this.onChange}
-                value={username}
-              />
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                onChange={this.onChange}
-                value={password}
-              />    
-            </div>
-           
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-            </div>
-            <p>
-              Don't have an account? <Link to="/register">Sign up</Link>
-            </p>
-          </form>
-        </div>
-      </div>
-        )
+          <Grid centered columns={2} style={{marginTop:20}}>
+            <Grid.Column>
+              <Segment textAlign='center' size={'huge'} style={{marginTop:20}}>
+                <Header style={{color:'#00008B'}} as={'h2'}>LOGIN</Header>
+                <Segment style={{height: 300}}>
+                  <Form>
+                <Form.Input name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                <Form.Input
+                      style={{marginTop:20}}
+                      name="password" onChange={this.onChange}
+                      fluid
+                      icon='lock'
+                      iconPosition='left'
+                      placeholder='Password'
+                      type='password'
+                />
+                <Form.Button style={{marginTop:115}} color='teal' fluid onClick={this.onSubmit}> Sign in</Form.Button>
+                </Form>
+                </Segment>
+              </Segment>
+              <Message>
+              New to us? <a href='/register'>Sign Up</a>
+              </Message>
+            </Grid.Column>
+          </Grid>
+        );
     }
 }
 

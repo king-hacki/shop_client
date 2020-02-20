@@ -8,7 +8,6 @@ import {connect} from 'react-redux'
 class Navbar extends React.Component {
 
     render(){
-        console.log("THISSSS" + this.props.user.role)
         return(
             <div>
                 {this.props.user.role == "ROLE_USER" || this.props.user.role == "user" ? <UserNavbar /> : <AdminNavbar/>}

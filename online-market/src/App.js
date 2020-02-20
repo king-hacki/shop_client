@@ -12,6 +12,7 @@ import Register from './Components/Register'
 import PrivateRoute from './Components/PrivateRoute';
 import AddNewItem from './Components/AddNewItem'
 import DatabaseUsers from './Components/DatabaseUsers'
+import ShoppingCart from './Components/ShoppingCart'
 
 import store from './store'
 import Navbar from './Components/Navbar/Navbar';
@@ -44,6 +45,7 @@ export default class App extends React.Component {
              <PrivateRoute exact path="/home" component={Home} />
              <PrivateRoute exact path="/createItem" component={AddNewItem} />
              <PrivateRoute exact path="/users" component={DatabaseUsers} />
+             <PrivateRoute exact path="/shoppingCart" component={ShoppingCart} />
              <Route exact path="/login" component={Login} />
              <Route exact path="/register" component={Register} />
           </Switch>
