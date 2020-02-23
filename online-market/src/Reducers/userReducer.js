@@ -26,8 +26,8 @@ export default function(state = initialState, action){
     switch(action.type){
         case LOGIN_SUCCESS:
             localStorage.setItem("access", action.payload.token);
-            console.log(state);
-            console.log(action);    
+            // console.log(state);
+            // console.log(action);    
             return{
                 ...state,
                 ...action.payload,
@@ -54,7 +54,7 @@ export default function(state = initialState, action){
                 isLoading: false
             } 
         case GET_ALL_USERS:
-            console.log(action.payload)
+            // console.log(action.payload)
             return{
                 ...state,
                 users: action.payload
@@ -74,8 +74,8 @@ export default function(state = initialState, action){
                 user: null
             }
         default:
-            console.log("Hello from default");
-            console.log(state)
+            // console.log("Hello from default");
+            // console.log(state)
             return state;
     }
 }

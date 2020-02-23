@@ -4,9 +4,10 @@ import {getItems} from '../Actions/productActions'
 import {addItem, getShoppingCart} from '../Actions/cartActions'
 import PropTypes from "prop-types";
 import logo from '../iphone-11-(bl)-350x350.jpg'
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBTooltip, MDBCardFooter, MDBIcon, MDBBtn } from "mdbreact";
 
 import {Card, Icon, Image} from 'semantic-ui-react'
+
+import {Link} from 'react-router-dom'
 
 export class Home extends React.Component {
     
@@ -34,19 +35,17 @@ export class Home extends React.Component {
 
     render() {
        const productItems = this.state.items.map(product => (
-      <Card>
+      <Card key = {product.mobileIdentifier} as={Link} to={`/home/${product.mobileIdentifier}`}>
         <Image src={logo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{product.brand}</Card.Header>
           <Card.Meta>{product.model}</Card.Meta>
-          <Card.Description>
-            This mobile phone was graduated in {product.graduationYear}
-          </Card.Description>
+          <Card.Description> {product.graduationYear} </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a onClick={() => this.onSubmit(product.mobileIdentifier)}>
+          {/* <a onClick={() => this.onSubmit(product.mobileIdentifier)}>
           <Icon name='cart' />
-          </a>
+          </a> */}
           Price: {product.price}
         </Card.Content>
       </Card>
@@ -55,7 +54,7 @@ export class Home extends React.Component {
     return (
             <div>
               <Card.Group itemsPerRow={6} centered style={{marginTop:20}}>
-              {productItems}
+                {productItems}
               </Card.Group>
             </div>
         )

@@ -1,15 +1,16 @@
-import { GET_ALL_ITEMS, CREATE_ITEM } from "../Actions/types";
+import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_CHAT } from "../Actions/types";
 
 const initState = {
     items: [],
     addedItems: [],
-    total: 0
+    total: 0, 
+    item: {}
 }
 
 export default function(state = initState, action){
     switch(action.type){
         case GET_ALL_ITEMS:
-            console.log("Hello from reducer")
+            // console.log("Hello from reducer")
             console.log(action.payload)
             return{
                 ...state,
@@ -20,6 +21,12 @@ export default function(state = initState, action){
             return{
                 ...state,
                 addedItems: action.payload
+            }
+        case GET_ITEM:   
+            console.log(action.payload)
+            return {
+                ...state,
+                item: action.payload
             }
         default:
             return state;
