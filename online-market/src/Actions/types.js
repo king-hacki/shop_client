@@ -16,7 +16,6 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const INVALID_TOKEN = "INVALID_TOKEN";
 export const GET_ALL_USERS = "GET_ALL_USERS";
-export const GET_USER = "GET_USER"
 
 export const GET_CART = "GET_CART";
 export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";

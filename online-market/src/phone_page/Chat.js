@@ -65,8 +65,26 @@ class Chat extends Component {
 }
 
 function dataCounter(date) {
-    if (date == null) {
-        switch(date) {
+    if (!(date == null)) {
+        console.log(moment().diff(date, 'minutes'))
+        console.log( moment().diff(date, 'hours'))
+        console.log(moment().diff(date, 'minutes') > 1);
+        console.log( moment().diff(date, 'hours') < 1)
+        switch(true) {
+            case moment().diff(date, 'minutes') > 1 &&  moment().diff(date, 'hours') < 1:
+               return moment().diff(date, 'minutes') + " minutes ago"
+
+            case moment().diff(date, 'hours') > 1 &&  moment().diff(date, 'days') < 1:
+                return moment().diff(date, 'hours') + " hours ago"
+
+            case moment().diff(date, 'days') > 1 &&  moment().diff(date, 'months') < 1:
+                return moment().diff(date, 'days') + " days ago"
+
+            case moment().diff(date, 'months') > 1 &&  moment().diff(date, 'years') < 1:
+                return moment().diff(date, 'months') + " months ago"
+
+            default :
+                return moment().diff(date, 'years') + " years ago"
             
         }
     } else {
