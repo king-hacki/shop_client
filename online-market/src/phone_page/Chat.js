@@ -29,8 +29,11 @@ class Chat extends Component {
 
     render() {
         let chatRender;
+        let i = 0;
         if (this.props.messageList.length > 0) {
-            chatRender = this.props.messageList.reverse().map(com => (
+            chatRender = this.props.messageList.reverse()
+                .filter(check => (i < 5 ? i++ : false))
+                .map(com => (
                 <Comment key={com.id}>
                     <Comment.Content>
                         <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
@@ -50,10 +53,10 @@ class Chat extends Component {
         
         return(
             <Comment.Group>
+                {chatRender}
                 <Header as='h3' dividing>
                     Comments
                 </Header>
-                {chatRender}
                 <Form reply>
                    <Form.TextArea name="message" onChange = {this.onChange} placeholder="Write your coment"/>
                    <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
@@ -66,10 +69,6 @@ class Chat extends Component {
 
 function dataCounter(date) {
     if (!(date == null)) {
-        console.log(moment().diff(date, 'minutes'))
-        console.log( moment().diff(date, 'hours'))
-        console.log(moment().diff(date, 'minutes') > 1);
-        console.log( moment().diff(date, 'hours') < 1)
         switch(true) {
             case moment().diff(date, 'minutes') > 1 &&  moment().diff(date, 'hours') < 1:
                return moment().diff(date, 'minutes') + " minutes ago"
