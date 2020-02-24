@@ -5,9 +5,7 @@ import {
  } from "../Actions/types";
 
  const initialState = {
-     comments: [],
-     isAdded: false,
-     addedComent: ""
+     coments: []
  }
 
  export default function (state = initialState, action) {
@@ -15,15 +13,13 @@ import {
         case GET_CHAT:
              return {
                  ...state,
-                 comments: action.payload
+                 coments: action.payload
              }
         case POST_CHAT:
-            //  end here 
-            //  TODO add to message to comments array
+            console.log(action.payload)
             return {
                 ...state,
-                addedComent: action.payload.message,
-                isAdded: true
+                coments: action.payload
             }
             
         default:

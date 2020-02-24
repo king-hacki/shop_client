@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import {getComents, postComent} from '../Actions/productActions'
+import {getComents, postComent} from '../Actions/comentAction'
 import PropTypes from "prop-types";
+import moment from "moment"
 
 class Chat extends Component {
 
@@ -17,7 +18,7 @@ class Chat extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-         this.props.postComent(this.state.message, this.props.user.username, this.props.phoneId)
+        this.props.postComent(this.state.message, this.props.user.username, this.props.phoneId, moment())
     }
 
     onChange = e => {
@@ -27,21 +28,15 @@ class Chat extends Component {
     }
 
     render() {
-
         let chatRender;
-        let newMessage;
         if (this.props.messageList.length > 0) {
-
-            chatRender = this.props.messageList.map(com => (
+            chatRender = this.props.messageList.reverse().map(com => (
                 <Comment key={com.id}>
                     <Comment.Content>
                         <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
                         <Comment.Author as="a">{com.username}</Comment.Author>
                         <Comment.Metadata>
-                            {
-                                //TODO Data functionality
-                            }
-                            <div>Data</div>
+                            <div>{dataCounter(com.date)}</div>
                         </Comment.Metadata>
                         <Comment.Text>{com.message}</Comment.Text>
                         <Comment.Actions>
@@ -51,26 +46,6 @@ class Chat extends Component {
                 </Comment>     
             ))
 
-            if (this.props.isMessageAdd) {
-                newMessage = (
-                    <Comment >
-                        <Comment.Content>
-                            <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-                            <Comment.Author as="a">{this.props.user.username}</Comment.Author>
-                            <Comment.Metadata>
-                                {
-                                    //TODO Data functionality
-                                }
-                                <div>Data</div>
-                            </Comment.Metadata>
-                            <Comment.Text>{this.props.addedMessage}</Comment.Text>
-                            <Comment.Actions>
-                                <Comment.Action>Reply</Comment.Action>
-                            </Comment.Actions>
-                        </Comment.Content>
-                    </Comment>  
-                )   
-            }
         }
         
         return(
@@ -79,20 +54,28 @@ class Chat extends Component {
                     Comments
                 </Header>
                 {chatRender}
-                {newMessage}
                 <Form reply>
                    <Form.TextArea name="message" onChange = {this.onChange} placeholder="Write your coment"/>
                    <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
                 </Form>     
+                
             </Comment.Group>
         );
     }
 }
 
+function dataCounter(date) {
+    if (date == null) {
+        switch(date) {
+            
+        }
+    } else {
+        return "default"
+    }
+}
+
 const mapStateToProps = state => ({
-    messageList: state.commentReducer.comments,
-    addedMessage: state.commentReducer.addedComent,
-    isMessageAdd: state.commentReducer.isAdded,
+    messageList: state.commentReducer.coments,
     user : state.userReducer.user
 })
 
