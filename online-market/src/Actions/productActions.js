@@ -6,6 +6,7 @@ import {
     CREATE_ITEM,
     UPDATE_ITEM,
     GET_ITEM,
+    INVALID_TOKEN,
     GET_CHAT,
     POST_CHAT
 } from './types';
@@ -33,6 +34,13 @@ export const getItems = () => (dispatch, getState) => {
                 type: GET_ALL_ITEMS,
                 payload: res.data
             })
+        })
+        .catch(err => {
+            if(err.response.status == 401){
+                dispatch({
+                    type: INVALID_TOKEN
+                })
+            }
         })
 };
 

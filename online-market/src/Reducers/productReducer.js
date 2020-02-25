@@ -4,7 +4,7 @@ const initState = {
     items: [],
     addedItems: [],
     total: 0, 
-    item: {}
+    item: null
 }
 
 export default function(state = initState, action){
