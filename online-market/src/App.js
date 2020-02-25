@@ -20,6 +20,8 @@ import Navbar from './Components/Navbar/Navbar';
 import {loadUser} from './Actions/userActions'
 
 import { ToastContainer, toast } from 'react-toastify';
+import Phone from './phone_page/Phone';
+
 
 
 toast.configure();
@@ -43,6 +45,7 @@ export default class App extends React.Component {
           <Switch>
              <PrivateRoute exact path="/profile" component={Profile} />
              <PrivateRoute exact path="/home" component={Home} />
+             <PrivateRoute path="/home/:id" component = {Phone} />
              <PrivateRoute exact path="/createItem" component={AddNewItem} />
              <PrivateRoute exact path="/users" component={DatabaseUsers} />
              <PrivateRoute exact path="/shoppingCart" component={ShoppingCart} />

@@ -46,7 +46,7 @@ render() {
                 active={activeItem === 'Shopping Cart'}
           >
             <Icon name="cart"/>
-            <Label color='red' floation>{this.props.total}</Label>
+            <Label color='red' ></Label>
           </Menu.Item>
           <Menu.Item
                 name='Logout'

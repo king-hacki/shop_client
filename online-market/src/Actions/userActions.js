@@ -11,6 +11,7 @@ import {
   REGISTER_FAIL,
   INVALID_TOKEN,
   GET_ALL_USERS,
+  GET_USER
 } from './types'
 
 import {getShoppingCart} from './cartActions'
@@ -20,27 +21,18 @@ import { toast } from 'react-toastify';
 export const loadUser = () => (dispatch, getState) => {
     dispatch({type: USER_LOADING});
 
+    // console.log(getState().productReducer);
+    // console.log(getState().userReducer);
+
     axios
         .get("http://localhost:8080/api/auth/loadUser", tokenConfig(getState))
-        .then(res=>{
-            console.log(res.data)
+        .then(res=> {
+            // console.log(res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             });
         })
-        .catch(err => {
-            if(err.response.status == 400 && err.response.data.code == "expired jwt token"){
-                dispatch({
-                    type: INVALID_TOKEN
-                })
-            }else{
-                dispatch({
-                    type: AUTH_ERROR
-                })
-            }
-        }
-        )
 }
 
 
@@ -51,6 +43,8 @@ export const loginUser = (username,password) => dispatch => {
         }
     };
     const body = JSON.stringify({username, password});
+
+    console.log('post')
 
     axios
         .post("http://localhost:8080/api/auth/signIn", body,config)
@@ -113,7 +107,7 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
         axios
             .get('http://localhost:8080/api/auth/allUsers', tokenConfig(getState))
             .then(res => {
-                console.log(res)
+                // console.log(res)
                dispatch({
                    type: GET_ALL_USERS,
                    payload: res.data
@@ -124,7 +118,7 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
     export const tokenConfig = getState => {
         const accessToken = getState().userReducer.accessToken;
 
-        console.log("ACCESS TOKEN: " + accessToken);
+        // console.log("ACCESS TOKEN: " + accessToken);
 
         const config = {
             headers : {
@@ -138,4 +132,3 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
 
         return config;
     }
-    

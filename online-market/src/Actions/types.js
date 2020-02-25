@@ -1,4 +1,5 @@
 export const GET_ALL_ITEMS = "GET_ALL_ITEMS";
+export const GET_ITEM = "GET_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const CREATE_ITEM = "CREATE_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
@@ -19,3 +20,6 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_CART = "GET_CART";
 export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
 export const DELETE_ITEM_FROM_CART = "DELETE_ITEM";
+
+export const GET_CHAT = "GET_CHAT";
+export const POST_CHAT = "POST_CHAT";

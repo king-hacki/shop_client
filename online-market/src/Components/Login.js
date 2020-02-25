@@ -20,7 +20,7 @@ class Login extends React.Component {
         username: "",
         password: ""
     }
-
+    
     static propTypes = {
         loginUser : PropTypes.func.isRequired,
         isAuthenticated: PropTypes.bool
@@ -50,7 +50,7 @@ class Login extends React.Component {
                 <Header style={{color:'#00008B'}} as={'h2'}>LOGIN</Header>
                 <Segment style={{height: 300}}>
                   <Form>
-                <Form.Input name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                <Form.Input name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='Username'/>
                 <Form.Input
                       style={{marginTop:20}}
                       name="password" onChange={this.onChange}

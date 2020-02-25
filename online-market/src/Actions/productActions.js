@@ -4,11 +4,25 @@ import {
     GET_ALL_ITEMS,
     DELETE_ITEM,
     CREATE_ITEM,
-    UPDATE_ITEM
+    UPDATE_ITEM,
+    GET_ITEM,
+    GET_CHAT,
+    POST_CHAT
 } from './types';
 
 import {tokenConfig} from './userActions';
 import { toast } from "react-toastify";
+
+export const getPhone = id => (dispatch, getState) => {
+    axios
+        .get(`http://localhost:8080/api/mobilePhone/${id}`, tokenConfig(getState))
+        .then(res => {
+            dispatch ( {
+                type : GET_ITEM,
+                payload : res.data
+            })
+        })
+}
 
 export const getItems = () => (dispatch, getState) => {
     axios
