@@ -18,6 +18,7 @@ export const getPhone = id => (dispatch, getState) => {
     axios
         .get(`http://localhost:8080/api/mobilePhone/${id}`, tokenConfig(getState))
         .then(res => {
+            console.log(res.data)
             dispatch ( {
                 type : GET_ITEM,
                 payload : res.data

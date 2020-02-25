@@ -30,6 +30,10 @@ class Chat extends Component {
     render() {
         let chatRender;
         let i = 5;      //  count of comments should be equal i
+
+        if(this.props.messageList == null){
+            return <h2>Loading...</h2>
+        }
         if (this.props.messageList.length > 0) {
             chatRender = this.props.messageList.slice().reverse()
                 .filter(check => (i > 0 ? i-- : false))
@@ -48,7 +52,6 @@ class Chat extends Component {
                         </Comment.Content>
                     </Comment>     
             ))
-
         }
         
         return(
@@ -66,7 +69,7 @@ class Chat extends Component {
     }
 }
 
-function dataCounter(date) {
+const dataCounter = date => {
     if (!(date == null)) {
         switch(true) {
 
@@ -98,5 +101,5 @@ const mapStateToProps = state => ({
     messageList: state.commentReducer.coments,
     user : state.userReducer.user
 })
-
+    
 export default connect(mapStateToProps, {getComents, postComent})(Chat);
