@@ -35,17 +35,17 @@ export class Home extends React.Component {
 
     render() {
        const productItems = this.state.items.map(product => (
-      <Card key = {product.mobileIdentifier} as={Link} to={`/home/${product.mobileIdentifier}`}>
-        <Image src={logo} wrapped ui={false} />
+      <Card key = {product.mobileIdentifier}>
+        <Image src={logo} wrapped ui={false}  as={Link} to={`/home/${product.mobileIdentifier}`} />
         <Card.Content>
           <Card.Header>{product.brand}</Card.Header>
           <Card.Meta>{product.model}</Card.Meta>
           <Card.Description> {product.graduationYear} </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          {/* <a onClick={() => this.onSubmit(product.mobileIdentifier)}>
+          {<a onClick={() => this.onSubmit(product.mobileIdentifier)}>
           <Icon name='cart' />
-          </a> */}
+          </a>}
           Price: {product.price}
         </Card.Content>
       </Card>
