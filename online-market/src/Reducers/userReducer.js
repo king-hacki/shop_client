@@ -7,7 +7,8 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    GET_ALL_USERS
+    GET_ALL_USERS,
+    INVALID_TOKEN
 } from "../Actions/types"
 
 const initialState = {
@@ -61,6 +62,7 @@ export default function(state = initialState, action){
             }
         case LOGIN_FAIL:
         case AUTH_ERROR:
+        case INVALID_TOKEN:
         case LOGOUT_SUCCESS:
         case REGISTER_FAIL:
             localStorage.removeItem("access");

@@ -33,6 +33,18 @@ export const loadUser = () => (dispatch, getState) => {
                 payload: res.data
             });
         })
+        .catch(err => {
+            if(err.response.status == 400 && err.response.data.code == "expired jwt token"){
+                dispatch({
+                    type: INVALID_TOKEN
+                })
+            }else{
+                dispatch({
+                    type: AUTH_ERROR
+                })
+            }
+        }
+        )
 }
 
 
