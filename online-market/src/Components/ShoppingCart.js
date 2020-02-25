@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
 
-import {getShoppingCart, deleteItem, applyOrder} from '../Actions/cartActions'
+import {getShoppingCart, deleteItem} from '../Actions/cartActions'
 
 import PropTypes from 'prop-types'
 
@@ -82,11 +82,6 @@ class ShoppingCart extends Component {
                         <Step.Title>{this.props.totalPrice}</Step.Title>
                     </StepContent>
                 </Step>
-                <Step>
-                    <StepContent>
-                        <Button positive onClick={this.props.applyOrder}>Apply</Button>
-                    </StepContent>
-                </Step>
             </Step.Group>
             </Container>
         )
@@ -98,4 +93,4 @@ const mapStateToProps = state => ({
     totalPrice : state.cartReducer.totalPrice
 })
 
-export default connect(mapStateToProps, {getShoppingCart, deleteItem, applyOrder})(ShoppingCart)
+export default connect(mapStateToProps, {getShoppingCart, deleteItem})(ShoppingCart)

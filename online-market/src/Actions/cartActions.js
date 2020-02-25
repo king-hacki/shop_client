@@ -67,11 +67,3 @@ export const deleteItem = (itemIdentifier) => (dispatch, getState) => {
             dispatch(getShoppingCart())
         })
 }
-
-export const applyOrder = () => (dispatch, getState) => {
-    axios
-        .post("http://localhost:8080/api/cart/apply",null, tokenConfig(getState))
-        .then(res =>{
-            console.log("SUCCESS")
-        })
-}
