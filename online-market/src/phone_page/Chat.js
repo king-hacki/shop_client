@@ -66,7 +66,7 @@ class Chat extends Component {
     }
 }
 
-function dataCounter(date) {
+const dataCounter =  date => {
     if (!(date == null)) {
         switch(true) {
 

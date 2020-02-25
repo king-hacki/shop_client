@@ -18,9 +18,6 @@ class Phone extends Component {
         if (!(this.props.phone.mobileIdentifier == undefined)) {
             ren = (
                 <Container>
-                    <Item href="/home">
-                        <Icon link name="home" size="large" style={{marginBottom: 20, marginTop: 10}}/>
-                    </Item>
                     <Grid columns={2}>
                         <Grid.Row>
                             <Grid.Column >
