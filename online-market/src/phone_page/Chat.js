@@ -29,39 +29,38 @@ class Chat extends Component {
 
     render() {
         let chatRender;
-        let i = 0;
+        let i = 5;      //  count of comments should be equal i
         if (this.props.messageList.length > 0) {
-            chatRender = this.props.messageList.reverse()
-                .filter(check => (i < 5 ? i++ : false))
-                .map(com => (
-                <Comment key={com.id}>
-                    <Comment.Content>
-                        <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-                        <Comment.Author as="a">{com.username}</Comment.Author>
-                        <Comment.Metadata>
-                            <div>{dataCounter(com.date)}</div>
-                        </Comment.Metadata>
-                        <Comment.Text>{com.message}</Comment.Text>
-                        <Comment.Actions>
-                            <Comment.Action>Reply</Comment.Action>
-                        </Comment.Actions>
-                    </Comment.Content>
-                </Comment>     
+            chatRender = this.props.messageList.slice().reverse()
+                .filter(check => (i > 0 ? i-- : false))
+                .map(com => ( 
+                    <Comment key={com.id}>
+                        <Comment.Content>
+                            <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+                            <Comment.Author as="a">{com.username}</Comment.Author>
+                            <Comment.Metadata>
+                                <div>{dataCounter(com.date)}</div>
+                            </Comment.Metadata>
+                            <Comment.Text>{com.message}</Comment.Text>
+                            <Comment.Actions>
+                                <Comment.Action>Reply</Comment.Action>
+                            </Comment.Actions>
+                        </Comment.Content>
+                    </Comment>     
             ))
 
         }
         
         return(
             <Comment.Group>
-                {chatRender}
                 <Header as='h3' dividing>
                     Comments
                 </Header>
-                <Form reply>
+                <Form style={{marginBottom:60}} reply>
                    <Form.TextArea name="message" onChange = {this.onChange} placeholder="Write your coment"/>
                    <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
                 </Form>     
-                
+                {chatRender}
             </Comment.Group>
         );
     }
@@ -70,6 +69,10 @@ class Chat extends Component {
 function dataCounter(date) {
     if (!(date == null)) {
         switch(true) {
+
+            case moment().diff(date, 'minutes') <= 1:
+                return "a few second ago"
+
             case moment().diff(date, 'minutes') > 1 &&  moment().diff(date, 'hours') < 1:
                return moment().diff(date, 'minutes') + " minutes ago"
 

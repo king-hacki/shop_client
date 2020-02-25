@@ -14,22 +14,28 @@ class Phone extends Component {
     }
 
     render() {
-        // console.log("render loaded")
         let ren;
         if (!(this.props.phone.mobileIdentifier == undefined)) {
-            // console.log(this.props.phone)
             ren = (
-                <Grid style={{marginLeft:50}}>
-                    <Grid.Row>
-                        <Header as="h3"> Brand {this.props.phone.brand}</Header>    
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Header as="h3"> Price {this.props.phone.price}</Header>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Chat phoneId = {this.props.phone.mobileIdentifier}/>
-                    </Grid.Row>
-                </Grid>
+                <Container>
+                    <Item href="/home">
+                        <Icon link name="home" size="large" style={{marginBottom: 20, marginTop: 10}}/>
+                    </Item>
+                    <Grid columns={2}>
+                        <Grid.Row>
+                            <Grid.Column >
+                                <Image src={logo} wrapped ui={true} />
+                            </Grid.Column>
+                            <Grid.Column style={{marginTop: 60}}> 
+                                <Header as="h1" style={{marginBottom: 2}}> Model {this.props.phone.model} Brand {this.props.phone.brand}</Header>                                       
+                                <Header as="h6" style={{marginTop: 0, marginBottom: 5}} size="tiny"> Rate </Header>
+                                <Header as="h4"> Price : {this.props.phone.price}</Header>
+                                <Header as="h4"> Year of graduation : {this.props.phone.graduationYear}</Header>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                    <Chat phoneId = {this.props.phone.mobileIdentifier}/>
+                </Container>
             )
         } 
 
