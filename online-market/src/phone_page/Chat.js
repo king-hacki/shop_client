@@ -18,7 +18,9 @@ class Chat extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.postComent(this.state.message, this.props.user.username, this.props.phoneId, moment())
+        if (this.state.message != "") {
+            this.props.postComent(this.state.message, this.props.user.username, this.props.phoneId, moment())
+        }
     }
 
     onChange = e => {
@@ -27,9 +29,17 @@ class Chat extends Component {
         })
     }
 
+    onEdit = id => {
+        console.log(id)
+    }
+
     render() {
         let chatRender;
         let i = 5;      //  count of comments should be equal i
+
+        if(this.props.messageList == null){
+            return <h2>Loading...</h2>
+        }
         if (this.props.messageList.length > 0) {
             chatRender = this.props.messageList.slice().reverse()
                 .filter(check => (i > 0 ? i-- : false))
@@ -44,12 +54,18 @@ class Chat extends Component {
                             <Comment.Text>{com.message}</Comment.Text>
                             <Comment.Actions>
                                 <Comment.Action>Reply</Comment.Action>
+                                <Comment.Action onClick={() => this.onEdit(com.id)}> 
+                                {
+                                    this.props.user.username != undefined ? 
+                                        this.props.user.username == com.username ?
+                                            "Edit" : ""
+                                        : ""
+                                } </Comment.Action>
                             </Comment.Actions>
                         </Comment.Content>
                     </Comment>     
             ))
-
-        }
+        } 
         
         return(
             <Comment.Group>
@@ -58,7 +74,7 @@ class Chat extends Component {
                 </Header>
                 <Form style={{marginBottom:60}} reply>
                    <Form.TextArea name="message" onChange = {this.onChange} placeholder="Write your coment"/>
-                   <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
+                   <Button onClick= {this.onSubmit} content="Add Comment" labelPosition='left' icon='edit' primary/>
                 </Form>     
                 {chatRender}
             </Comment.Group>
@@ -98,5 +114,5 @@ const mapStateToProps = state => ({
     messageList: state.commentReducer.coments,
     user : state.userReducer.user
 })
-
+    
 export default connect(mapStateToProps, {getComents, postComent})(Chat);

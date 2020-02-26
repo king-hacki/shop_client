@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
 
-import {getShoppingCart, deleteItem} from '../Actions/cartActions'
+import {getShoppingCart, deleteItem, applyOrder} from '../Actions/cartActions'
 
 import PropTypes from 'prop-types'
 
@@ -30,9 +30,11 @@ class ShoppingCart extends Component {
     }
 
     componentWillUpdate(){
+        if(this.props.shoppingCart != null){
         this.props.shoppingCart.mobilePhoneList.map(item=>{
             this.state.totalPrice += item.price
         })
+    }
     }
 
     onSubmit = itemIdentifier => {
@@ -45,6 +47,7 @@ class ShoppingCart extends Component {
         if(this.props.shoppingCart == null){
             return "Loading..."
         }
+        console.log(this.props.shoppingCart)
         return(
             <Container style={{marginTop:20}} padded centered>
             <Table columns={5} singleLine>
@@ -82,6 +85,11 @@ class ShoppingCart extends Component {
                         <Step.Title>{this.props.totalPrice}</Step.Title>
                     </StepContent>
                 </Step>
+                <Step>
+                    <StepContent>
+                        <Button positive onClick={this.props.applyOrder}>Apply</Button>
+                    </StepContent>
+                </Step>
             </Step.Group>
             </Container>
         )
@@ -93,4 +101,4 @@ const mapStateToProps = state => ({
     totalPrice : state.cartReducer.totalPrice
 })
 
-export default connect(mapStateToProps, {getShoppingCart, deleteItem})(ShoppingCart)
+export default connect(mapStateToProps, {getShoppingCart, deleteItem, applyOrder})(ShoppingCart)
