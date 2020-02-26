@@ -23,7 +23,9 @@ import {
             }
             
         default:
-            return state;
+            return{
+                ...state
+            }
 
      }
  }

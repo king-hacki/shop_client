@@ -29,6 +29,9 @@ export default function(state = initState, action){
                 item: action.payload
             }
         default:
-            return state;
+            console.log(localStorage)
+            return{
+                ...state
+            }
     }
 }

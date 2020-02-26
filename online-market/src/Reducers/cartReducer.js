@@ -31,6 +31,8 @@ export default function(state = initialState, action){
                 total : state.total - 1
             }
         default:
-            return state;
+            return{
+                ...state
+            }
     }
 }
