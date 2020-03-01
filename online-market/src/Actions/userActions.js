@@ -21,13 +21,12 @@ import { toast } from 'react-toastify';
 export const loadUser = () => (dispatch, getState) => {
     dispatch({type: USER_LOADING});
 
-    // console.log(getState().productReducer);
-    // console.log(getState().userReducer);
-
+    console.log(getState().productReducer);
+    console.log(getState().userReducer);
     axios
         .get("http://localhost:8080/api/auth/loadUser", tokenConfig(getState))
         .then(res=> {
-            // console.log(res.data)
+            console.log(res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
@@ -134,7 +133,7 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
 
         const config = {
             headers : {
-                "Content-type" : "application/json"
+                "Content-type" : "application/json",
             }
         };
 
@@ -143,4 +142,13 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
         }
 
         return config;
+    }
+
+    export const savePhoto = imageFile => (dispatch, getState) => {
+
+        axios
+            .post("http://localhost:8080/api/auth/savePhoto", imageFile, tokenConfig(getState))
+            .then(res=>{
+                console.log(res.data)
+            })
     }

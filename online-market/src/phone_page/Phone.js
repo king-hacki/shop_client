@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link, Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
+import {getPhone} from '../Actions/productActions'
 import PropTypes from "prop-types";
 import logo from '../iphone-11-(bl)-350x350.jpg'
 import {Card, Icon, Image, Container, Header, Item, Grid, Comment} from 'semantic-ui-react'
@@ -16,10 +17,10 @@ class Phone extends Component {
         phone : PropTypes.object.isRequired
     }
 
-    componentWillMount() {
-        console.log(this.props.match.params.id)
-        //this.props.getPhone(this.props.match.params.id)
+    componentDidMount(){
+        this.props.getPhone(this.props.match.params.id)
     }
+
 
     render() {
         let ren;
@@ -30,6 +31,9 @@ class Phone extends Component {
         }
             ren = (
                 <Container>
+                    <Item href="/home">
+                        <Icon link name="home" size="large" style={{marginBottom: 20, marginTop: 10}}/>
+                    </Item>
                     <Grid columns={2}>
                         <Grid.Row>
                             <Grid.Column >
@@ -61,4 +65,4 @@ const mapStateToProps = state => ({
      phone : state.productReducer.item
 })
 
-export default connect(mapStateToProps)(Phone);
+export default connect(mapStateToProps, {getPhone})(Phone);

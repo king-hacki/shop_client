@@ -9,6 +9,8 @@ import {connect} from 'react-redux'
 
 import { logout } from "../../Actions/userActions";
 
+import {getShoppingCart} from "../../Actions/cartActions";
+
 import menu from "../../App.css"
 import {Container} from 'semantic-ui-react'
 
@@ -17,6 +19,10 @@ class UserNavbar extends Component {
 
   state = {
     activeItem: 'home'
+  }
+
+  componentDidMount(){
+      this.props.getShoppingCart();
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -63,4 +69,4 @@ const mapStateToProps = state => ({
     total : state.cartReducer.total
 })
 
-export default connect(mapStateToProps, {logout})(UserNavbar);
+export default connect(mapStateToProps, {logout, getShoppingCart})(UserNavbar);

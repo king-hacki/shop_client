@@ -23,3 +23,4 @@ export const DELETE_ITEM_FROM_CART = "DELETE_ITEM";
 
 export const GET_CHAT = "GET_CHAT";
 export const POST_CHAT = "POST_CHAT";
+export const EDIT_CHAT = "EDIT_CHAT";

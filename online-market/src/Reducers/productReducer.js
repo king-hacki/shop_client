@@ -1,3 +1,4 @@
+
 import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_CHAT } from "../Actions/types";
 
 const initState = {
@@ -5,6 +6,7 @@ const initState = {
     addedItems: [],
     total: 0, 
     item: null
+
 }
 
 export default function(state = initState, action){
@@ -29,6 +31,9 @@ export default function(state = initState, action){
                 item: action.payload
             }
         default:
-            return state;
+            // console.log(localStorage)
+            return{
+                ...state
+            }
     }
 }
