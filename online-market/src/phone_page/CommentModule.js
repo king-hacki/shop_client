@@ -3,12 +3,14 @@ import { Button, Comment, Form, Header, Reveal, Icon, Grid, Image} from 'semanti
 import moment from "moment"
 import { connect } from 'react-redux';
 import {updateComent} from "../Actions/comentAction"
+import Replies from './Replies';
 
 class CommentModule extends Component {
     state = {
         editMessage: "",
         defaultMessage: "",
-        isHiden: false
+        isHiden: false,
+        reply: false
     }
 
     componentWillMount() {
@@ -39,19 +41,25 @@ class CommentModule extends Component {
         })
     }
 
+    showReply = () => {
+        this.setState({
+            reply: true
+        })
+    } 
+
     render() {
         return (
             <div>
                 { !this.state.isHiden ? 
                     <Comment.Content>
                         <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-                        <Comment.Author as="a">{this.props.comment.username}</Comment.Author>
+                        <Comment.Author style={{marginLeft: 10}} as="a">{this.props.comment.username}</Comment.Author>
                         <Comment.Metadata>
                             <div>{dataCounter(this.props.comment.date)}</div>
                         </Comment.Metadata>
-                        <Comment.Text>{this.state.editMessage}</Comment.Text>
-                        <Comment.Actions>
-                            <Comment.Action>Reply</Comment.Action>
+                        <Comment.Text style={{marginLeft: 45}}>{this.state.editMessage}</Comment.Text>
+                        <Comment.Actions style={{marginLeft: 45}}>
+                            <Comment.Action onClick={this.showReply}>Reply</Comment.Action>
                             {this.props.username == this.props.comment.username ? 
                                 <Comment.Action onClick = {this.onEditChange} >Edit</Comment.Action>
                                 :
@@ -75,6 +83,16 @@ class CommentModule extends Component {
                         </Grid.Row>
                     </Grid>  
                 }
+
+                <Comment.Group>
+                    {console.log(this.props.comment)}
+                    {this.props.comment.replies != 0 ?
+                        <Replies replies={this.props.comment.replies} isShow={this.state.reply}/>
+                        :
+                        ""
+                    }
+                </Comment.Group>
+
             </div>
         )
     }

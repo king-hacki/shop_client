@@ -31,13 +31,13 @@ class Chat extends Component {
     render() {
         
         let chatRender;
-        let i = 5;      //  count of comments should be equal i
+        let i = 3;      //  count of comments should be equal i
 
-        if (this.props.messageList == null || this.props.messageList > 0) {
+        if (this.props.messageList == null || this.props.messageList.length == 0) {
             return <h2>Loanding ...</h2>
         } else {
             chatRender = this.props.messageList.slice().reverse()
-            .filter(check => (i > 0 ? i-- : false))
+            .filter(() => (i > 0 ? i-- : false))
             .map(com => (
                 <Comment key={com.id}>
                     <CommentModule comment={com} username = {this.props.user.username}/>  
@@ -46,7 +46,7 @@ class Chat extends Component {
         }
 
         return(
-           <Comment.Group>
+           <Comment.Group threaded>
                 <Header as='h3' dividing>
                     Comments
                 </Header>
