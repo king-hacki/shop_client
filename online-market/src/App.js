@@ -28,6 +28,12 @@ toast.configure();
 
 export default class App extends React.Component {
 
+
+  //  don't scroll to the top after render component
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentWillMount(){
     store.dispatch(loadUser())
   }
@@ -36,8 +42,6 @@ export default class App extends React.Component {
     position:toast.POSITION.TOP_CENTER
 })
   }
-
-    
 
   render(){
     return (

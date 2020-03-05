@@ -11,7 +11,7 @@ import {toast} from 'react-toastify'
 export const postReply = (message, username, date, messageParentId) => (dispatch, getState) => {
     
     const body = JSON.stringify({message, username, date, messageParentId})
-    console.log(body)
+    // console.log(body)
 
     axios
         .post("http://localhost:8080/api/mobilePhone/chat/reply", body, tokenConfig(getState))
@@ -26,13 +26,14 @@ export const postReply = (message, username, date, messageParentId) => (dispatch
         })
 }
 
-export const getReplies = (messageId) => (dispatch, getState) => {
-    axios
-        .get(`http://localhost:8080/api/mobilePhone/chat/reply/${messageId}`, tokenConfig(getState))
-        .then(res => {
-            dispatch({
-                type: GET_REPLIES,
-                payload: res.data
-            })
-        })
-}
+    //  no need
+// export const getReplies = (messageId) => (dispatch, getState) => {
+//     axios
+//         .get(`http://localhost:8080/api/mobilePhone/chat/reply/${messageId}`, tokenConfig(getState))
+//         .then(res => {
+//             dispatch({
+//                 type: GET_REPLIES,
+//                 payload: res.data
+//             })
+//         })
+// }

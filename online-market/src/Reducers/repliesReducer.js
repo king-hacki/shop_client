@@ -11,9 +11,10 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case POST_REPLY:
+            console.log(action.payload)
             return {
-                ...state
-                //  TODO
+                ...state,
+                replies: [...state.replies, action.payload]
             }    
         
         case GET_REPLIES: 

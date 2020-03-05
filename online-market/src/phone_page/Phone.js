@@ -4,17 +4,13 @@ import { connect } from 'react-redux';
 import {getPhone} from '../Actions/productActions'
 import PropTypes from "prop-types";
 import logo from '../iphone-11-(bl)-350x350.jpg'
-import {Card, Icon, Image, Container, Header, Item, Grid, Comment} from 'semantic-ui-react'
+import {Card, Icon, Image, Container, Header, Item, Grid, Segment} from 'semantic-ui-react'
 import Chat from './Chat';
 
 class Phone extends Component {
 
     state = {
         item: null
-    }
-
-    static propTypes = {
-        phone : PropTypes.object.isRequired
     }
 
     componentDidMount(){
@@ -47,13 +43,17 @@ class Phone extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    <Chat phoneId = {this.props.phone.mobileIdentifier}/>
+                    <Segment>
+                        <Header as='h3'> Comments </Header> 
+                        <Chat phoneId = {this.props.phone.mobileIdentifier}/>
+                    </Segment>
                 </Container>
             )
 
         return(
             <div>
                 {ren}
+                <Header as="h2"> Some Text</Header>
             </div>
         );
     }

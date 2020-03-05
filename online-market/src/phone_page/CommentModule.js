@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Comment, Form, Header, Reveal, Icon, Grid, Image} from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Reveal, Icon, Grid, Image, GridRow, GridColumn} from 'semantic-ui-react'
 import moment from "moment"
 import { connect } from 'react-redux';
-import {updateComent} from "../Actions/comentAction"
+import { postReply } from "../Actions/repliesAction"
 import Replies from './Replies';
 
 class CommentModule extends Component {
@@ -10,8 +10,11 @@ class CommentModule extends Component {
         editMessage: "",
         defaultMessage: "",
         isHiden: false,
-        reply: false
+        replyIsShow: false,
+        replyMessage: ""
     }
+
+    
 
     componentWillMount() {
         this.setState({editMessage: this.props.comment.message, defaultMessage: this.props.comment.message})
@@ -42,10 +45,21 @@ class CommentModule extends Component {
     }
 
     showReply = () => {
-        this.setState({
-            reply: true
-        })
+        if (this.state.replyIsShow == true) {
+            this.setState({
+                replyIsShow: false
+            })
+        } else {
+            this.setState({
+                replyIsShow: true
+            })
+        }
     } 
+
+    onReply = () => {
+        this.props.postReply(this.state.replyMessage, this.props.username, moment(), this.props.comment.id)
+        this.showReply()
+    }
 
     render() {
         return (
@@ -84,13 +98,26 @@ class CommentModule extends Component {
                     </Grid>  
                 }
 
-                <Comment.Group>
-                    {console.log(this.props.comment)}
-                    {this.props.comment.replies != 0 ?
-                        <Replies replies={this.props.comment.replies} isShow={this.state.reply}/>
-                        :
-                        ""
-                    }
+                { this.state.replyIsShow ?
+                    <Form reply>
+                        <Form.TextArea onChange={this.onChange} name = "replyMessage" placeholder="Write your reply"/>
+                        <Grid style={{marginLeft: 29}} columns={2}>
+                            <GridRow>
+                                <GridColumn >
+                                    <Button onClick={this.onReply} content="Add Reply" labelPosition='left' icon='edit' primary/>
+                                </GridColumn>
+                                <GridColumn>
+                                    <Icon onClick={this.showReply} size="big" name="close"></Icon>
+                                </GridColumn>
+                            </GridRow>
+                        </Grid>
+                    </Form>
+                    :
+                    ""
+                }
+
+                <Comment.Group key={this.props.comment.replies.id} >
+                    <Replies replies={this.props.comment.replies} parentId={this.props.comment.id}/>
                 </Comment.Group>
 
             </div>
@@ -127,5 +154,4 @@ const dataCounter =  date => {
     }
 }
 
-
-export default connect(null, {updateComent})(CommentModule)
+export default connect(null, {postReply})(CommentModule)

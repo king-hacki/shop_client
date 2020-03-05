@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Comment, Form, Header, Reveal} from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Divider} from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import {getComents, postComent} from '../Actions/comentAction'
 import PropTypes from "prop-types";
@@ -11,6 +11,9 @@ class Chat extends Component {
     state = {
         message: ""
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+      }
 
     componentDidMount() {
         console.log("Chat is mounted")
@@ -31,25 +34,33 @@ class Chat extends Component {
     render() {
         
         let chatRender;
-        let i = 3;      //  count of comments should be equal i
+        let i = 6;      //  count of comments should be equal i
 
         if (this.props.messageList == null || this.props.messageList.length == 0) {
-            return <h2>Loanding ...</h2>
+            return ( 
+                <div>                    
+                    <Form style={{marginBottom:60}} reply>
+                        <Form.TextArea name = "message" onChange = {this.onChange} placeholder="Write your coment"/>
+                        <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
+                    </Form>     
+                </div>
+                )
         } else {
             chatRender = this.props.messageList.slice().reverse()
-            .filter(() => (i > 0 ? i-- : false))
+            .filter(() => (i > 3 ? i-- : false))
             .map(com => (
                 <Comment key={com.id}>
+                    {console.log("key in Chat " + com.id)}
                     <CommentModule comment={com} username = {this.props.user.username}/>  
+                    <Divider horizontal>
+                        Next Reply
+                    </Divider>
                 </Comment>
             ))
         }
 
         return(
            <Comment.Group threaded>
-                <Header as='h3' dividing>
-                    Comments
-                </Header>
                 <Form style={{marginBottom:60}} reply>
                    <Form.TextArea name = "message" onChange = {this.onChange} placeholder="Write your coment"/>
                    <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
