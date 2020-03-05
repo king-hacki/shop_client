@@ -21,6 +21,7 @@ import {loadUser} from './Actions/userActions'
 
 import { ToastContainer, toast } from 'react-toastify';
 import Phone from './phone_page/Phone';
+import Footer from './Components/Footer';
 
 
 
@@ -58,6 +59,7 @@ export default class App extends React.Component {
              <Route exact path="/login" component={Login} />
              <Route exact path="/register" component={Register} />
           </Switch>
+          <Footer/>
           </Router>
         </Provider>
     );

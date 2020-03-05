@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Comment, Form, Header, Divider} from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import {getComents, postComent} from '../Actions/comentAction'
+import {getComents, postComent} from '../../Actions/comentAction'
 import PropTypes from "prop-types";
 import moment from "moment"
 import CommentModule from './CommentModule';
@@ -11,6 +11,8 @@ class Chat extends Component {
     state = {
         message: ""
     }
+
+    //  don't scroll
     componentDidMount() {
         window.scrollTo(0, 0)
       }

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom'
-
-
-
 import {Menu, Label, Icon} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'

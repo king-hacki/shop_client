@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Button, Comment, Form, Header, Reveal, Icon, Grid, Image, GridRow, GridColumn} from 'semantic-ui-react'
 import moment from "moment"
 import { connect } from 'react-redux';
-import { postReply } from "../Actions/repliesAction"
+import { postReply } from "../../Actions/repliesAction"
+import { updateComent } from "../../Actions/comentAction"
 import Replies from './Replies';
 
 class CommentModule extends Component {
@@ -154,4 +155,4 @@ const dataCounter =  date => {
     }
 }
 
-export default connect(null, {postReply})(CommentModule)
+export default connect(null, {postReply, updateComent})(CommentModule)
