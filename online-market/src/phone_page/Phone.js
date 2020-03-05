@@ -27,9 +27,6 @@ class Phone extends Component {
         }
             ren = (
                 <Container>
-                    <Item href="/home">
-                        <Icon link name="home" size="large" style={{marginBottom: 20, marginTop: 10}}/>
-                    </Item>
                     <Grid columns={2}>
                         <Grid.Row>
                             <Grid.Column >
@@ -53,7 +50,6 @@ class Phone extends Component {
         return(
             <div>
                 {ren}
-                <Header as="h2"> Some Text</Header>
             </div>
         );
     }
