@@ -46,7 +46,8 @@ export default function(state = initialState, action){
                 ...state,
                 isAuthenticated: true,
                 isLoading: false,
-                user: action.payload
+                user: action.payload,
+                role: action.payload.authorities[0].authority
             }       
         case REGISTER_SUCCESS:
             return{

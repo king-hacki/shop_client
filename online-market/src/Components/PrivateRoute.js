@@ -1,17 +1,21 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
+import {Image, Segment, Dimmer, Loader} from 'semantic-ui-react'
 
 const PrivateRoute = ({component: Component,users,...rest }) => (
     <Route
         {...rest}
         render={ props => {
-            console.log(Component)
-            console.log(users);
-            console.log("USER AUTHENTICATED FROM PRIVATE_ROUTE:" + users.isAuthenticated)
             if (users.isLoading) {
-                return <h2>Loading...</h2>;
+                return (
+                <Segment>
+                <Dimmer active inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>
+                )
               } else if(!users.isAuthenticated && !users.isLoading){
                 return <Redirect to="/login" />
             }else{

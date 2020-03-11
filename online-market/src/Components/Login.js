@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 import {loginUser} from '../Actions/userActions';
 
@@ -8,14 +8,13 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { Button, Header, Message,Input,Form, Grid, Segment} from 'semantic-ui-react'
+import {Header, Message,Form, Grid, Segment} from 'semantic-ui-react'
 
 import "semantic-ui-css/semantic.min.css";
 
 
-import "../App.css";
-
 class Login extends React.Component {
+
     state = {           
         username: "",
         password: ""
@@ -28,12 +27,10 @@ class Login extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state)
         this.props.loginUser(this.state.username, this.state.password);
     }
 
     onChange = e =>{
-      console.log(e.target.name)
        this.setState({
         [e.target.name] : e.target.value
     });
@@ -49,8 +46,8 @@ class Login extends React.Component {
               <Segment textAlign='center' size={'huge'} style={{marginTop:20}}>
                 <Header style={{color:'#00008B'}} as={'h2'}>LOGIN</Header>
                 <Segment style={{height: 300}}>
-                  <Form>
-                <Form.Input name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='Username'/>
+                  <Form size="huge">
+                <Form.Input  name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='Username'/>
                 <Form.Input
                       style={{marginTop:20}}
                       name="password" onChange={this.onChange}
@@ -60,7 +57,7 @@ class Login extends React.Component {
                       placeholder='Password'
                       type='password'
                 />
-                <Form.Button style={{marginTop:115}} color='teal' fluid onClick={this.onSubmit}> Sign in</Form.Button>
+                <Form.Button style={{marginTop:40}} size="large" color='teal' fluid onClick={this.onSubmit}> Sign in</Form.Button>
                 </Form>
                 </Segment>
               </Segment>

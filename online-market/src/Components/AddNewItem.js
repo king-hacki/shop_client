@@ -5,6 +5,14 @@ import {connect} from 'react-redux';
 import {createItem} from '../Actions/productActions'
 
 import PropTypes from 'prop-types'
+import { Container, Form, Segment, Grid } from 'semantic-ui-react';
+
+import styled from 'styled-components'
+import { toast } from 'react-toastify';
+
+const StyledSegment = styled(Segment)`
+    margin-top: 40px !important;
+`
 
 class AddNewItem extends Component {
     
@@ -13,6 +21,7 @@ class AddNewItem extends Component {
         brand : "",
         model : "",
         graduationYear : "",
+        image: null,
         price : ""
     }
 
@@ -24,83 +33,92 @@ class AddNewItem extends Component {
         [e.target.name] : e.target.value
     })
 
+    handleChangePhoto = e => {
+
+        let reader = new FileReader();
+
+        if(e.target.files[0].type != "image/png" && e.target.files[0].type != "image/jpeg"){
+            toast.error("You selected not 'png' or 'jpeg' format, try again", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+        }else{
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = () => {
+                this.setState({
+                    image: reader.result
+                })
+            }
+        }
+    }
+
     onSubmit = e => {
         e.preventDefault();
         console.log(this.state.graduationYear);
+        console.log(this.state);
+
         this.props.createItem(
             this.state.mobileIdentifier,
             this.state.brand,
             this.state.model,
             this.state.graduationYear,
-            this.state.price
+            this.state.price,
+            this.state.image
         )
     }
     
     render(){
-        const {mobileIdentifier, brand, model, graduationYear, price} = this.state;
         return(
-        <div className="col-md-6 m-auto">
-            <div className="card card-body mt-5">
-                <h2 className="text-center">Create new Item</h2>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>mobileIdentifier</label>
-                        <input
-                            type="mobileIdentifier"
-                            className="form-control"
-                            name="mobileIdentifier"
-                            onChange={this.onChange}
-                            value={mobileIdentifier}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>brand</label>
-                        <input
-                            type="brand"
-                            className="form-control"
-                            name="brand"
-                            onChange={this.onChange}
-                            value={brand}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>model</label>
-                        <input
-                            type="model"
-                            className="form-control"
-                            name="model"
-                            onChange={this.onChange}
-                            value={model}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>graduationYear</label>
-                        <input
-                            type="graduationYear"
-                            className="form-control"
-                            name="graduationYear"
-                            onChange={this.onChange}
-                            value={graduationYear}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>price</label>
-                        <input
-                            type="price"
-                            className="form-control"
-                            name="price"
-                            onChange={this.onChange}
-                            value={price}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary">
-                            Save
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+            <Grid>
+                <Grid.Column width={4}/>
+                <Grid.Column width={8}>
+                <StyledSegment>
+                <Form>
+                    <Form.Input
+                                label="Mobile Identifier" 
+                                name="mobileIdentifier"
+                                onChange={this.onChange}
+                                placeholder="Enter mobile identifier"
+                                />
+                    <Form.Input
+                                label="Brand" 
+                                name="brand"
+                                onChange={this.onChange}
+                                placeholder="Enter brand of phone"
+                                />
+                    <Form.Input
+                                label="Model" 
+                                name="model"
+                                onChange={this.onChange}
+                                placeholder="Enter model of phone"
+                                />                                
+                    <Form.Input
+                                label="Graduation Year" 
+                                name="graduationYear"
+                                onChange={this.onChange}
+                                placeholder="Enter graduation year of phone"
+                                />
+                    <Form.Input
+                                label="Price" 
+                                name="price"
+                                onChange={this.onChange}
+                                placeholder="Enter price of phone"
+                                />                            
+                    <Form.Input
+                                label="Image"
+                                name="image"
+                                onChange={this.handleChangePhoto}
+                                accept="image/png"
+                                type="file"
+                                />               
+                    <Form.Button
+                                color="teal"
+                                onClick={this.onSubmit}
+                                >Save Phone</Form.Button>     
+                </Form>
+                </StyledSegment>
+                </Grid.Column>
+                <Grid.Column width={4} />  
+            </Grid> 
         )
     }
 }

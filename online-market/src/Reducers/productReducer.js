@@ -1,35 +1,37 @@
-import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_CHAT } from "../Actions/types";
+import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_ALL_ITEMS_PAGE } from "../Actions/types";
 
 const initState = {
     items: [],
     addedItems: [],
-    total: 0, 
+    pageItems: [],
+    totalPages: 0,
     item: null
 }
 
 export default function(state = initState, action){
     switch(action.type){
         case GET_ALL_ITEMS:
-            // console.log("Hello from reducer")
-            console.log(action.payload)
             return{
                 ...state,
                 items: action.payload
             }
+        case GET_ALL_ITEMS_PAGE:
+            return{
+                ...state,
+                pageItems: action.payload.content,
+                totalPages: action.payload.totalPages
+            }
         case CREATE_ITEM:
-            console.log(action.payload)
             return{
                 ...state,
                 addedItems: action.payload
             }
         case GET_ITEM:   
-            console.log(action.payload)
             return {
                 ...state,
                 item: action.payload
             }
         default:
-            console.log(localStorage)
             return{
                 ...state
             }

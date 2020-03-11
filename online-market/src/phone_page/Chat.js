@@ -12,7 +12,6 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        console.log("Chat is mounted")
         this.props.getComents(this.props.phoneId)
     }
 

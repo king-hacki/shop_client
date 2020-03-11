@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
-import {Link, Redirect } from 'react-router-dom';
+import {Redirect } from 'react-router-dom';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {registerUser} from '../Actions/userActions'
-import { toast } from 'react-toastify';
 
 import { Button, Header, Message,Input,Form, Grid, Segment} from 'semantic-ui-react'
 
+import styled from 'styled-components'
+
+const StyledInput = styled(Form.Input)``
+
+const StyledButton = styled(Form.Button)`
+  margin-top:130px !important;
+`
 
 export class Register extends Component {
     state = {
@@ -51,34 +57,30 @@ export class Register extends Component {
               <Segment textAlign='center' size={'small'} style={{marginTop:20}}>
                 <Header style={{color:'#00008B'}} as={'h2'}>REGISTER</Header>
                 <Segment style={{height: 500}}>
-                  <Form>
-                <Form.Input name="username" onChange={this.onChange} fluid placeholder='E-mail address'/>
-                <Form.Input
-                      style={{marginTop:20}}
+                <Form size={'large'}>
+                <StyledInput name="username" onChange={this.onChange} fluid placeholder='username'/>
+                <StyledInput
                       name="password" onChange={this.onChange}
                       fluid
                       placeholder='Password'
                       type='password'
                 />
-                <Form.Input
-                      style={{marginTop:20}}
+                <StyledInput
                       name="firstName" onChange={this.onChange}
                       fluid
                       placeholder='First Name'
                 />
-                <Form.Input
-                      style={{marginTop:20}}
+                <StyledInput
                       name="lastName" onChange={this.onChange}
                       fluid
                       placeholder='Last Name'
                 />
-                <Form.Input
-                      style={{marginTop:20}}
+                <StyledInput
                       name="email" onChange={this.onChange}
                       fluid
                       placeholder='E-mail'
                 />
-                <Form.Button style={{marginTop:15}} color='teal' fluid onClick={this.onSubmit}> Sign Up</Form.Button>
+                <StyledButton size="large" color='teal' fluid onClick={this.onSubmit}> Sign Up</StyledButton>
                 </Form>
                 </Segment>
               </Segment>

@@ -1,7 +1,7 @@
 import {
     GET_CART,
     ADD_ITEM_TO_CART,
-    DELETE_ITEM
+    DELETE_ITEM_FROM_CART
 } from '../Actions/types'
 
 const initialState = {
@@ -25,7 +25,7 @@ export default function(state = initialState, action){
                 ...state,
                 total : state.total + 1
             }
-        case DELETE_ITEM:
+        case DELETE_ITEM_FROM_CART:
             return{
                 ...state,
                 total : state.total - 1

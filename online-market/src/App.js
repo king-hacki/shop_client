@@ -19,9 +19,12 @@ import Navbar from './Components/Navbar/Navbar';
 
 import {loadUser} from './Actions/userActions'
 
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import Phone from './phone_page/Phone';
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-toastify/dist/ReactToastify.css'; 
+import 'semantic-ui-css/semantic.min.css'
 
 
 toast.configure();
@@ -37,7 +40,7 @@ export default class App extends React.Component {
 })
   }
 
-    
+
 
   render(){
     return (

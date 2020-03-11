@@ -1,15 +1,23 @@
 import React, { Component } from "react";
-import {NavLink, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-import {Menu, Segment} from 'semantic-ui-react'
+import {Menu} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
 import { logout } from "../../Actions/userActions";
 
+import styled from 'styled-components'
+
+const StyledMenu = styled(Menu)`
+    height:80px;
+    border-radius: 0px !important; 
+`
+
+
 class AdminNavbar extends Component {
 
   state = {
-    activeItem: 'home'
+    activeItem: ''
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -17,15 +25,15 @@ class AdminNavbar extends Component {
 render() {
   const {activeItem} = this.state;
   return (
-      <Menu inverted secondary style={{height: 80}} color={'black'} size={'huge'}>
+    <StyledMenu pointing inverted size={"massive"}>
         <Menu.Item as={Link} to="/home"
-              name='Online-market'
+              name="online-market"
               />
         <Menu.Menu position='right'>
           <Menu.Item as={Link} to="/home"
                 name='Home'
                 onClick={this.handleItemClick}
-                active={activeItem === 'home'}
+                active={activeItem === 'Home'}
           />
           <Menu.Item as={Link} to="/createItem"
                 name='Create Item'
@@ -43,7 +51,7 @@ render() {
                 onClick={this.props.logout}
           />
         </Menu.Menu>
-      </Menu>
+      </StyledMenu>
     );
   }
 }

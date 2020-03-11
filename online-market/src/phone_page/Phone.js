@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import {Link, Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
 import {getPhone} from '../Actions/productActions'
 import PropTypes from "prop-types";
 import logo from '../iphone-11-(bl)-350x350.jpg'
-import {Card, Icon, Image, Container, Header, Item, Grid, Comment} from 'semantic-ui-react'
+import {Icon, Image, Container, Header, Item, Grid, Comment, Segment, Dimmer, Loader} from 'semantic-ui-react'
 import Chat from './Chat';
 
 class Phone extends Component {
@@ -25,9 +24,15 @@ class Phone extends Component {
     render() {
         let ren;
         if(this.props.phone == null){
-            return(
-                <h2>Loading...</h2>
-            )
+            return (
+                <Segment>
+                <Dimmer active inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>
+          
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>
+                )
         }
             ren = (
                 <Container>

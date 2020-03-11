@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 
 
-import {Menu, Label, Icon} from 'semantic-ui-react'
+import {Menu, Label, Icon, Container} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
 
@@ -11,14 +11,19 @@ import { logout } from "../../Actions/userActions";
 
 import {getShoppingCart} from "../../Actions/cartActions";
 
-import menu from "../../App.css"
-import {Container} from 'semantic-ui-react'
+import styled from 'styled-components'
+
+
+const StyledMenu = styled(Menu)`
+    height:80px;
+    border-radius: 0px !important; 
+`
+
 
 class UserNavbar extends Component {
 
-
   state = {
-    activeItem: 'home'
+    activeItem: ''
   }
 
   componentDidMount(){
@@ -31,9 +36,9 @@ class UserNavbar extends Component {
 render() {
   const {activeItem} = this.state;
   return (
-      <Menu inverted secondary style={{height: 80}} color={'black'} size={'huge'}>
+      <StyledMenu pointing inverted size={"massive"}>
         <Menu.Item as={Link} to="/home"
-              name='Online-market'
+              name="online-market"
               />
         <Menu.Menu position='right'>
           <Menu.Item as={Link} to="/home"
@@ -52,7 +57,7 @@ render() {
                 active={activeItem === 'Shopping Cart'}
           >
             <Icon name="cart"/>
-            <Label color='red' floation>{this.props.total}</Label>
+            <Label color='red' floation="true">{this.props.total}</Label>
           </Menu.Item>
           <Menu.Item
                 name='Logout'
@@ -60,7 +65,7 @@ render() {
                 onClick={this.props.logout}
           />
         </Menu.Menu>
-      </Menu>
+      </StyledMenu>
     );
   }
 }

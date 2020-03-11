@@ -10,7 +10,7 @@ class Navbar extends React.Component {
     render(){
         return(
             <div>
-                {this.props.user.role == "ROLE_USER" || this.props.user.role == "user" ? <UserNavbar /> : <AdminNavbar/>}
+                {this.props.user.role === "ROLE_USER" || this.props.user.role === "user" ? <UserNavbar /> : <AdminNavbar/>}
             </div>
         );
     }

@@ -6,9 +6,8 @@ import {getShoppingCart, deleteItem, applyOrder} from '../Actions/cartActions'
 
 import PropTypes from 'prop-types'
 
-import BootstrapTable from 'react-bootstrap-table'
-import TableHeaderColumn from 'react-bootstrap-table'
-import {Button, Table, Container, Step, StepContent} from 'semantic-ui-react'
+import {Image, Container, Segment, Dimmer, Loader} from 'semantic-ui-react'
+import {Button, Table,Step, StepContent} from 'semantic-ui-react'
 
 
 
@@ -30,6 +29,17 @@ class ShoppingCart extends Component {
     }
 
     componentWillUpdate(){
+        if(this.props.shoppingCart == null){
+            return (
+                <Segment>
+                <Dimmer active inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>
+          
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>
+                )
+        }
         this.props.shoppingCart.mobilePhoneList.map(item=>{
             this.state.totalPrice += item.price
         })
@@ -43,7 +53,15 @@ class ShoppingCart extends Component {
     render(){
         
         if(this.props.shoppingCart == null){
-            return "Loading..."
+            return (
+                <Segment>
+                <Dimmer active inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>
+          
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>
+                )
         }
         return(
             <Container style={{marginTop:20}} padded centered>

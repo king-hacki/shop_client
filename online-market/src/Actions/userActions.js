@@ -10,31 +10,27 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   INVALID_TOKEN,
-  GET_ALL_USERS,
-  GET_USER
+  GET_ALL_USERS
 } from './types'
 
 import {getShoppingCart} from './cartActions'
 
 import { toast } from 'react-toastify';
+            
 
 export const loadUser = () => (dispatch, getState) => {
     dispatch({type: USER_LOADING});
 
-    // console.log(getState().productReducer);
-    // console.log(getState().userReducer);
-
     axios
         .get("http://localhost:8080/api/auth/loadUser", tokenConfig(getState))
         .then(res=> {
-            // console.log(res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             });
         })
         .catch(err => {
-            if(err.response.status == 400 && err.response.data.code == "expired jwt token"){
+            if(err.response.status === 400 && err.response.data.code === "expired jwt token"){
                 dispatch({
                     type: INVALID_TOKEN
                 })
@@ -49,14 +45,13 @@ export const loadUser = () => (dispatch, getState) => {
 
 
 export const loginUser = (username,password) => dispatch => {
+
     const config = {
         headers : {
             "Content-Type" : "application/json"
         }
     };
     const body = JSON.stringify({username, password});
-
-    console.log('post')
 
     axios
         .post("http://localhost:8080/api/auth/signIn", body,config)
@@ -67,7 +62,6 @@ export const loginUser = (username,password) => dispatch => {
             })
             dispatch(loadUser())
             dispatch(getShoppingCart())
-            console.log(res.data)
         })
         .catch(err => {
             toast.error(JSON.stringify("Invalid password or login"))
@@ -119,7 +113,6 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
         axios
             .get('http://localhost:8080/api/auth/allUsers', tokenConfig(getState))
             .then(res => {
-                // console.log(res)
                dispatch({
                    type: GET_ALL_USERS,
                    payload: res.data
@@ -129,8 +122,6 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
 
     export const tokenConfig = getState => {
         const accessToken = getState().userReducer.accessToken;
-
-        // console.log("ACCESS TOKEN: " + accessToken);
 
         const config = {
             headers : {
@@ -147,9 +138,36 @@ export const registerUser = ({username,firstName, lastName, email, password}) =>
 
     export const savePhoto = imageFile => (dispatch, getState) => {
 
+        const config = tokenConfig(getState)
+
+        config.headers["Content-type"] = "multipart/form-data"
+
+        const formData = new FormData();
+        formData.append('imageFile' , imageFile);
+
         axios
-            .post("http://localhost:8080/api/auth/savePhoto", imageFile, tokenConfig(getState))
+            .post("http://localhost:8080/api/auth/savePhoto", formData, config)
             .then(res=>{
-                console.log(res.data)
+                dispatch(loadUser())
+                toast.success("Photo save successfully", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            })
+    }
+
+    export const changeAccount = (username, email,password, newPassword) => (dispatch, getState) => {
+        const dataAccount = {
+            "username" : username,
+            "email" : email,
+            "password" : password + "-" + newPassword,
+        }
+
+        axios
+            .post("http://localhost:8080/api/auth/changeAccount", dataAccount, tokenConfig(getState))
+            .then(res => {
+                toast.success("Changes saved successfully, please reenter in account", {
+                    position : toast.POSITION.BOTTOM_RIGHT
+                });
+                
             })
     }
