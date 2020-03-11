@@ -117,7 +117,7 @@ class CommentModule extends Component {
                     ""
                 }
 
-                <Comment.Group key={this.props.comment.replies.id} >
+                <Comment.Group>
                     <Replies replies={this.props.comment.replies} parentId={this.props.comment.id}/>
                 </Comment.Group>
 

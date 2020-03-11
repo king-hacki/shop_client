@@ -12,11 +12,6 @@ class Chat extends Component {
         message: ""
     }
 
-    //  don't scroll
-    componentDidMount() {
-        window.scrollTo(0, 0)
-      }
-
     componentDidMount() {
         console.log("Chat is mounted")
         this.props.getComents(this.props.phoneId)

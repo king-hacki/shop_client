@@ -22,10 +22,12 @@ import CommentModule from './CommentModule';
             )
         }
         if (this.props.replies != undefined) {
-            render = this.props.replies.reverse().map(reply => (
-                <Comment key={reply.id}>
-                    <CommentModule  username = {this.props.user.username} comment={reply}/>
-                </Comment>
+            render = this.props.replies
+                .sort((a, b) => {return b.id - a.id})
+                .map(reply => (
+                    <Comment key={reply.id}>
+                        <CommentModule  username = {this.props.user.username} comment={reply}/>
+                    </Comment>
         ))
         } else {
             return (

@@ -13,22 +13,16 @@ import PrivateRoute from './Components/PrivateRoute';
 import AddNewItem from './Components/AddNewItem'
 import DatabaseUsers from './Components/DatabaseUsers'
 import ShoppingCart from './Components/ShoppingCart'
-
 import store from './store'
 import Navbar from './Components/Navbar/Navbar';
-
 import {loadUser} from './Actions/userActions'
-
 import { ToastContainer, toast } from 'react-toastify';
-import Phone from './phone_page/Phone';
+import Phone from './Components/phone_page/Phone'
 import Footer from './Components/Footer';
-
-
 
 toast.configure();
 
 export default class App extends React.Component {
-
 
   //  don't scroll to the top after render component
   componentDidMount() {

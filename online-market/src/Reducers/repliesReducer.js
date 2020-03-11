@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
             console.log(action.payload)
             return {
                 ...state,
-                replies: [...state.replies, action.payload]
+                replies: [action.payload, ...state.replies]
             }    
         
         case GET_REPLIES: 
