@@ -21,9 +21,18 @@ import { toast } from 'react-toastify';
 export const loadUser = () => (dispatch, getState) => {
     dispatch({type: USER_LOADING});
 
+<<<<<<< HEAD
     axios
         .get("http://localhost:8080/api/auth/loadUser", tokenConfig(getState))
         .then(res=> {
+=======
+    console.log(getState().productReducer);
+    console.log(getState().userReducer);
+    axios
+        .get("http://localhost:8080/api/auth/loadUser", tokenConfig(getState))
+        .then(res=> {
+            console.log(res.data)
+>>>>>>> 91376e82dfe44dcb866a581e907b8d6936109ff5
             dispatch({
                 type: USER_LOADED,
                 payload: res.data

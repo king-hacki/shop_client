@@ -2,7 +2,8 @@ import axios from 'axios'
 
 import {
     GET_CHAT,
-    POST_CHAT
+    POST_CHAT,
+    EDIT_CHAT
 } from './types'
 
 import {tokenConfig} from './userActions'
@@ -35,3 +36,21 @@ export const postComent = (message, username, phoneId, date) => (dispatch, getSt
             })
         })
 }
+
+export const updateComent = (message, username, messageId, date) => (dispatch, getState) => {
+
+    const body = JSON.stringify({message, username, messageId, date})
+    console.log(body)
+    axios   
+        .post('http://localhost:8080/api/mobilePhone/chat/update', body, tokenConfig(getState))
+        .then(res => {
+            toast.success("Coment edited", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+            dispatch({
+                type: EDIT_CHAT,
+                payload: res.data
+            })
+        })
+}
+

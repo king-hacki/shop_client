@@ -29,6 +29,7 @@ class ShoppingCart extends Component {
     }
 
     componentWillUpdate(){
+/*
         if(this.props.shoppingCart == null){
             return (
                 <Segment>
@@ -40,9 +41,12 @@ class ShoppingCart extends Component {
               </Segment>
                 )
         }
+*/
+        if(this.props.shoppingCart != null){
         this.props.shoppingCart.mobilePhoneList.map(item=>{
             this.state.totalPrice += item.price
         })
+    }
     }
 
     onSubmit = itemIdentifier => {
@@ -63,6 +67,7 @@ class ShoppingCart extends Component {
               </Segment>
                 )
         }
+        console.log(this.props.shoppingCart)
         return(
             <Container style={{marginTop:20}} padded centered>
             <Table columns={5} singleLine>

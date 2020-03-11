@@ -27,3 +27,8 @@ export const POST_CHAT = "POST_CHAT";
 
 export const GET_FILTERS = "GET_FILTERS";
 export const FILTERED = "FILTERED";
+
+export const EDIT_CHAT = "EDIT_CHAT";
+export const GET_REPLIES = "GET_REPLIES"
+export const POST_REPLY = "POST_REPLY"
+

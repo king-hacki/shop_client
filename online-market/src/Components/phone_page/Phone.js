@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {getPhone} from '../Actions/productActions'
-import PropTypes from "prop-types";
-import logo from '../iphone-11-(bl)-350x350.jpg'
-import {Icon, Image, Container, Header, Item, Grid, Comment, Segment, Dimmer, Loader} from 'semantic-ui-react'
+
+import {getPhone} from '../../Actions/productActions'
+import logo from '../../iphone-11-(bl)-350x350.jpg'
+import {Image, Container, Header, Grid, Segment} from 'semantic-ui-react'
+
 import Chat from './Chat';
 
 class Phone extends Component {
 
     state = {
         item: null
-    }
-
-    static propTypes = {
-        phone : PropTypes.object.isRequired
     }
 
     componentDidMount(){
@@ -36,9 +33,6 @@ class Phone extends Component {
         }
             ren = (
                 <Container>
-                    <Item href="/home">
-                        <Icon link name="home" size="large" style={{marginBottom: 20, marginTop: 10}}/>
-                    </Item>
                     <Grid columns={2}>
                         <Grid.Row>
                             <Grid.Column >
@@ -52,7 +46,10 @@ class Phone extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    <Chat phoneId = {this.props.phone.mobileIdentifier}/>
+                    <Segment>
+                        <Header as='h3'> Comments </Header> 
+                        <Chat phoneId = {this.props.phone.mobileIdentifier}/>
+                    </Segment>
                 </Container>
             )
 

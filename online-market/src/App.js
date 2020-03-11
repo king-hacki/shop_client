@@ -13,10 +13,8 @@ import PrivateRoute from './Components/PrivateRoute';
 import AddNewItem from './Components/AddNewItem'
 import DatabaseUsers from './Components/DatabaseUsers'
 import ShoppingCart from './Components/ShoppingCart'
-
 import store from './store'
 import Navbar from './Components/Navbar/Navbar';
-
 import {loadUser} from './Actions/userActions'
 
 import {toast } from 'react-toastify';
@@ -26,10 +24,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'; 
 import 'semantic-ui-css/semantic.min.css'
 
+import Phone from './Components/phone_page/Phone'
+import Footer from './Components/Footer';
+
 
 toast.configure();
 
 export default class App extends React.Component {
+
+  //  don't scroll to the top after render component
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillMount(){
     store.dispatch(loadUser())
@@ -40,8 +46,7 @@ export default class App extends React.Component {
 })
   }
 
-
-
+  
   render(){
     return (
         <Provider store={store}>
@@ -57,6 +62,7 @@ export default class App extends React.Component {
              <Route exact path="/login" component={Login} />
              <Route exact path="/register" component={Register} />
           </Switch>
+          <Footer/>
           </Router>
         </Provider>
     );

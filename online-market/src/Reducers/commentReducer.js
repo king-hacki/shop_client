@@ -1,7 +1,8 @@
 
 import {
     GET_CHAT,
-    POST_CHAT
+    POST_CHAT,
+    EDIT_CHAT
  } from "../Actions/types";
 
  const initialState = {
@@ -21,7 +22,11 @@ import {
                 ...state,
                 coments: action.payload
             }
-            
+        case EDIT_CHAT:
+            console.log(action.payload)
+            return {
+                ...state
+            }
         default:
             return{
                 ...state
