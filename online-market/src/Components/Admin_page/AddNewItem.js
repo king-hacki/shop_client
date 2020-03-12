@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux';
 
-import {createItem} from '../Actions/productActions'
+import {createItem} from '../../Actions/productActions'
 
 import PropTypes from 'prop-types'
 import { Container, Form, Segment, Grid } from 'semantic-ui-react';

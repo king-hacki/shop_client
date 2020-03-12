@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Redirect} from "react-router-dom";
 
-import {loginUser} from '../Actions/userActions';
+import {loginUser} from '../../Actions/userActions';
 
 import {connect} from 'react-redux';
 
@@ -12,6 +12,31 @@ import {Header, Message,Form, Grid, Segment} from 'semantic-ui-react'
 
 import "semantic-ui-css/semantic.min.css";
 
+import styled from 'styled-components'
+
+const StyledHeader = styled(Header)`
+    color:'#00008B'
+`
+
+const StyledSegmentFirst = styled(Segment)`
+  height:300px !important;
+`
+
+const StyledSegmentSecond = styled(Segment)`
+  margin-top:20px !important;
+`
+
+const StyledFormInput = styled(Form.Input)`
+  margin-top:20px !important;
+`
+
+const StyledGrid = styled(Grid)`
+  margin-top:20px !important;
+`
+
+const StyledFormButton = styled(Form.Button)`
+  marginTop:40px !important;
+`
 
 class Login extends React.Component {
 
@@ -41,15 +66,14 @@ class Login extends React.Component {
             return <Redirect to="/home" />;
         }
         return (
-          <Grid centered columns={2} style={{marginTop:20}}>
+          <StyledGrid centered columns={2}>
             <Grid.Column>
-              <Segment textAlign='center' size={'huge'} style={{marginTop:20}}>
-                <Header style={{color:'#00008B'}} as={'h2'}>LOGIN</Header>
-                <Segment style={{height: 300}}>
+              <StyledSegmentSecond textAlign='center' size={'huge'}>
+                <StyledHeader as={'h2'}>LOGIN</StyledHeader>
+                <StyledSegmentFirst>
                   <Form size="huge">
                 <Form.Input  name="username" onChange={this.onChange} fluid icon='user' iconPosition='left' placeholder='Username'/>
-                <Form.Input
-                      style={{marginTop:20}}
+                <StyledFormInput
                       name="password" onChange={this.onChange}
                       fluid
                       icon='lock'
@@ -57,15 +81,15 @@ class Login extends React.Component {
                       placeholder='Password'
                       type='password'
                 />
-                <Form.Button style={{marginTop:40}} size="large" color='teal' fluid onClick={this.onSubmit}> Sign in</Form.Button>
+                <Form.Button size="large" color='teal' fluid onClick={this.onSubmit}> Sign in</Form.Button>
                 </Form>
-                </Segment>
-              </Segment>
+                </StyledSegmentFirst>
+              </StyledSegmentSecond>
               <Message>
               New to us? <a href='/register'>Sign Up</a>
               </Message>
             </Grid.Column>
-          </Grid>
+          </StyledGrid>
         );
     }
 }

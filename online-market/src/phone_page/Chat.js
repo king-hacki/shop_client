@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import {getComents, postComent} from '../Actions/comentAction'
 import PropTypes from "prop-types";
 import moment from "moment"
+import styled from 'styled-components'
+
+const StyledForm = styled(Form)`
+    margin-bottom: 60px !important;
+`
 
 class Chat extends Component {
 
@@ -58,10 +63,10 @@ class Chat extends Component {
                 <Header as='h3' dividing>
                     Comments
                 </Header>
-                <Form style={{marginBottom:60}} reply>
+                <StyledForm reply>
                    <Form.TextArea name="message" onChange = {this.onChange} placeholder="Write your coment"/>
                    <Button onClick= {this.onSubmit} content="Add Coment" labelPosition='left' icon='edit' primary/>
-                </Form>     
+                </StyledForm>     
                 {chatRender}
             </Comment.Group>
         );

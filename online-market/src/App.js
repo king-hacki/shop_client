@@ -5,27 +5,26 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import { Provider } from "react-redux";
 
-import Home from './Components/Home';
-import Login from './Components/Login';
-import Profile from './Components/Profile'
-import Register from './Components/Register'
-import PrivateRoute from './Components/PrivateRoute';
-import AddNewItem from './Components/AddNewItem'
-import DatabaseUsers from './Components/DatabaseUsers'
-import ShoppingCart from './Components/ShoppingCart'
+import Home from './Components/Common/Home';
+import Login from './Components/Common/Login';
+import Profile from './Components/User_page/Profile'
+import Register from './Components/Common/Register'
+import PrivateRoute from './Components/Common/PrivateRoute';
+import AddNewItem from './Components/Admin_page/AddNewItem'
+import DatabaseUsers from './Components/Admin_page/DatabaseUsers'
+import ShoppingCart from './Components/User_page/ShoppingCart'
 import store from './store'
 import Navbar from './Components/Navbar/Navbar';
 import {loadUser} from './Actions/userActions'
 
 import {toast } from 'react-toastify';
-import Phone from './phone_page/Phone';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'; 
 import 'semantic-ui-css/semantic.min.css'
 
 import Phone from './Components/phone_page/Phone'
-import Footer from './Components/Footer';
+import Footer from './Components/Common/Footer';
 
 
 toast.configure();
@@ -46,7 +45,7 @@ export default class App extends React.Component {
 })
   }
 
-  
+
   render(){
     return (
         <Provider store={store}>

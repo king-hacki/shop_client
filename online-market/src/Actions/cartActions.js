@@ -30,10 +30,6 @@ export const getShoppingCart = () => (dispatch, getState) => {
 
 export const addItem = (item) => (dispatch, getState) => {
 
-    console.log(tokenConfig(getState))
-    
-    console.log("ITEM" + item)
-
     axios
         .post(`http://localhost:8080/api/cart/addItem/${item}`,null, tokenConfig(getState))
         .then(res => {

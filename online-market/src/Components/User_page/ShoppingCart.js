@@ -2,13 +2,20 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
 
-import {getShoppingCart, deleteItem, applyOrder} from '../Actions/cartActions'
+import {getShoppingCart, deleteItem, applyOrder} from '../../Actions/cartActions'
 
 import PropTypes from 'prop-types'
 
 import {Image, Container, Segment, Dimmer, Loader} from 'semantic-ui-react'
 import {Button, Table,Step, StepContent} from 'semantic-ui-react'
 
+import styled from 'styled-components'
+
+const StyledContainer = styled(Container)`
+    margin-top: 40px !important;
+    height:355px !important;
+    overflow-y:scroll;
+`
 
 
 class ShoppingCart extends Component {
@@ -29,19 +36,6 @@ class ShoppingCart extends Component {
     }
 
     componentWillUpdate(){
-/*
-        if(this.props.shoppingCart == null){
-            return (
-                <Segment>
-                <Dimmer active inverted>
-                  <Loader inverted content='Loading' />
-                </Dimmer>
-          
-                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-              </Segment>
-                )
-        }
-*/
         if(this.props.shoppingCart != null){
         this.props.shoppingCart.mobilePhoneList.map(item=>{
             this.state.totalPrice += item.price
@@ -69,7 +63,7 @@ class ShoppingCart extends Component {
         }
         console.log(this.props.shoppingCart)
         return(
-            <Container style={{marginTop:20}} padded centered>
+            <StyledContainer padded centered>
             <Table columns={5} singleLine>
             <Table.Header>
             <Table.Row>
@@ -111,7 +105,7 @@ class ShoppingCart extends Component {
                     </StepContent>
                 </Step>
             </Step.Group>
-            </Container>
+            </StyledContainer>
         )
     }
 }

@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_ALL_ITEMS_PAGE } from "../Actions/types";
-=======
 
-import { GET_ALL_ITEMS, CREATE_ITEM, GET_ITEM, GET_CHAT } from "../Actions/types";
->>>>>>> 91376e82dfe44dcb866a581e907b8d6936109ff5
 
 const initState = {
     items: [],
@@ -38,10 +34,6 @@ export default function(state = initState, action){
                 item: action.payload
             }
         default:
-<<<<<<< HEAD
-=======
-            // console.log(localStorage)
->>>>>>> 91376e82dfe44dcb866a581e907b8d6936109ff5
             return{
                 ...state
             }

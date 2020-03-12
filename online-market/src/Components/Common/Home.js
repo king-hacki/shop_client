@@ -1,7 +1,7 @@
 import React from 'react'
 
-import HomeUser from './HomeUser'
-import HomeAdmin from './HomeAdmin.js'
+import HomeUser from '../User_page/HomeUser'
+import HomeAdmin from '../Admin_page/HomeAdmin.js'
 
 import {connect} from 'react-redux'
 

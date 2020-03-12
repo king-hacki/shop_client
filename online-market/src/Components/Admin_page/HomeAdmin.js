@@ -4,9 +4,16 @@ import {connect} from 'react-redux'
 
 import {Icon, Image, Segment, Dimmer, Loader, Pagination, Container, Grid} from 'semantic-ui-react'
 
-import {getItemsPaging} from '../Actions/productActions'
+import {getItemsPaging} from '../../Actions/productActions'
 
-import Cards from './Cards'
+import Cards from '../Common/Cards'
+
+import styled from 'styled-components'
+
+const StyledPagination = styled(Pagination)`
+  marginTop:40px !important;
+  height:20px !important;
+`
 
 class HomeAdmin extends Component{
 
@@ -50,8 +57,7 @@ class HomeAdmin extends Component{
                   </Grid.Column>
                   <Grid.Column width={this.props.totalPages > 5 ? 4 : 5} />
                   <Grid.Column width={10}>
-                  <Pagination
-                            style={{marginTop:40, height:20}}
+                  <StyledPagination
                             defaultActivePage={1}
                             onPageChange={this.handlePaginationChange}
                             ellipsisItem={{ content: <Icon name='ellipsis horizontal' />, icon: true }}

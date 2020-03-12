@@ -1,16 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import {getItemsPaging, getAllItems} from '../Actions/productActions'
-import {addItem, getShoppingCart} from '../Actions/cartActions'
-import {getFilters, filterByBrands} from '../Actions/filterActions'
+import {getItemsPaging, getAllItems} from '../../Actions/productActions'
+import {addItem, getShoppingCart} from '../../Actions/cartActions'
+import {getFilters, filterByBrands} from '../../Actions/filterActions'
 
 import PropTypes from "prop-types";
 
 import Filter from './Filter'
-import Cards from './Cards'
+import Cards from '../Common/Cards'
 
 import {Icon, Image, Segment, Dimmer, Loader, Pagination, Container, Grid} from 'semantic-ui-react'
+
+import styled from 'styled-components'
+
+const StyledPagination = styled(Pagination)`
+  margin-top:40px !important; 
+  height:20px !important;
+`
 
 export class HomeUser extends React.Component {
     
@@ -62,8 +69,7 @@ export class HomeUser extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={this.props.totalPages > 5 ? 4 : 5} />
                 <Grid.Column width={10}>
-                <Pagination
-                          style={{marginTop:40, height:20}}
+                <StyledPagination
                           defaultActivePage={1}
                           onPageChange={this.handlePaginationChange}
                           ellipsisItem={{ content: <Icon name='ellipsis horizontal' />, icon: true }}

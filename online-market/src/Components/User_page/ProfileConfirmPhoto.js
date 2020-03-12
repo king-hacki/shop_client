@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import {toast} from 'react-toastify'
 
-import {savePhoto} from '../Actions/userActions'
+import {savePhoto} from '../../Actions/userActions'
 
 import {connect} from 'react-redux'
 

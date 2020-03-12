@@ -2,15 +2,19 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import {savePhoto, changeAccount} from '../Actions/userActions'
+import {savePhoto, changeAccount} from '../../Actions/userActions'
 
-import {Image, Container, Grid, Input,Form, Segment, Header, Button, Card, Divider, Dimmer} from 'semantic-ui-react'
+import {Image, Container, Grid, Form, Segment, Header, Button, Card, Divider} from 'semantic-ui-react'
 
-import emptyLogo from '../square-image.png'
-
-import {toast} from 'react-toastify'
+import emptyLogo from '../../Images/square-image.png'
 
 import ProfileConfirmPhoto from './ProfileConfirmPhoto'
+
+import styled from 'styled-components'
+
+const StyledGrid = styled(Grid)`
+    margin-top: 20px !important;
+`
 
 class Profile extends Component {
     
@@ -44,7 +48,7 @@ class Profile extends Component {
     render(){
         return(
             <Container>
-            <Grid columns={2} style={{marginTop:20}} stackable>
+            <StyledGrid columns={2} stackable>
                 <Grid.Column width={1} />
                 <Grid.Column width={7}>
                     <Segment>
@@ -78,7 +82,7 @@ class Profile extends Component {
                             </Grid.Column>
                         </Segment>
                     </Grid.Column>
-            </Grid>
+            </StyledGrid>
             </Container>
         )
     }

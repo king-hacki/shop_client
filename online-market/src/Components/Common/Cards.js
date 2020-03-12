@@ -4,18 +4,17 @@ import {connect} from 'react-redux'
 
 import {Card, Image, Icon, Button} from 'semantic-ui-react'
 
-import {addItem} from '../Actions/cartActions'
-import {deleteItemFromDB} from '../Actions/productActions'
+import {addItem} from '../../Actions/cartActions'
+import {deleteItemFromDB} from '../../Actions/productActions'
 
 import {Link} from 'react-router-dom'
 
-import logo from '../iphone-11-(bl)-350x350.jpg'
-
 import styled from 'styled-components'
 
-const StyledImage = styled(Image)`
-    height: 200px;
+const StyledCardGroup = styled(Card.Group)`
+    margin-top:20px !important;
 `
+
 
 class Cards extends Component {
 
@@ -30,9 +29,10 @@ class Cards extends Component {
 
     render(){
         return(
-            <Card.Group itemsPerRow={6} centered style={{marginTop:20}}>
+            <StyledCardGroup itemsPerRow={6} centered>
                 {this.props.items.map(product => (
-                    <Card key = {product.mobileIdentifier} image={product.image}>       
+                    <Card key = {product.mobileIdentifier}>
+                    <Image src={product.image} wrapped ui={false}  as={Link} to={`/home/${product.mobileIdentifier}`} />
                     <Card.Content>
                         <Card.Header>{product.brand}</Card.Header>
                         <Card.Meta>{product.model}</Card.Meta>
@@ -51,7 +51,7 @@ class Cards extends Component {
                     </Card>
                 ))
             }
-            </Card.Group>
+            </StyledCardGroup>
         )
     }
 }
@@ -61,6 +61,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {addItem, deleteItemFromDB})(Cards);
-
-
-//<StyledImage src={/*logo*/ product.image} wrapped ui={false} /*as={Link} to={`/home/${product.mobileIdentifier}`}*/ />

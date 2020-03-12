@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect } from 'react-router-dom';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {registerUser} from '../Actions/userActions'
+import {registerUser} from '../../Actions/userActions'
 
 import { Button, Header, Message,Input,Form, Grid, Segment} from 'semantic-ui-react'
 

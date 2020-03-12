@@ -4,16 +4,17 @@ import {connect} from 'react-redux'
 
 import PropTypes from 'prop-types'
 
-import {getAllUsers} from '../Actions/userActions'
+import {getAllUsers} from '../../Actions/userActions'
 
 import {Table, Container, Segment, Dimmer, Loader} from 'semantic-ui-react'
 
 import styled from 'styled-components'
 
 const StyledContainer = styled(Container)`
-    margin-top:20px;
+    margin-top:40px;
+    height: 355px !important;
+    overflow-y:scroll;
 `
-
 
 class DatabaseUsers extends Component {
 
@@ -64,28 +65,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,{getAllUsers})(DatabaseUsers)
-
-/*
- <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Username</TableCell>
-                            <TableCell align="right">First Name</TableCell>
-                            <TableCell align="right">Last Name</TableCell>
-                            <TableCell align="right">Email</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.props.users.map(person=>(
-                            <TableRow key={person.id}>
-                            <TableCell component="th" score="row">{person.username}</TableCell>
-                            <TableCell align="right" component="th" score="row">{person.firstName}</TableCell>
-                            <TableCell align="right" component="th" score="row">{person.lastName}</TableCell>
-                            <TableCell align="right" component="th" score="row">{person.email}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            */

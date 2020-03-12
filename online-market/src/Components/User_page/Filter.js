@@ -2,8 +2,8 @@ import React,{Component} from 'react'
 
 import {Segment, Divider, Checkbox, Input, Button} from 'semantic-ui-react'
 
-import {getFilters, filterByBrands} from '../Actions/filterActions'
-import {getItemsPaging} from '../Actions/productActions'
+import {getFilters, filterByBrands} from '../../Actions/filterActions'
+import {getItemsPaging} from '../../Actions/productActions'
 
 import {connect} from 'react-redux'
 
@@ -15,6 +15,10 @@ import {toast} from 'react-toastify'
 const StyledInput = styled(Input)`
     width: 90px;
     height:10px !important;
+`
+
+const StyledSegment = styled(Segment)`
+    margin-top:30px !important;
 `
 
 class Filter extends Component {
@@ -82,7 +86,7 @@ class Filter extends Component {
             this.props.getItemsPaging(1)
           }
         return(
-            <Segment style={{marginTop:30}}>
+            <StyledSegment>
                 <h2>Filter</h2>
                 <Divider/>
                 <h4>Brand</h4>
@@ -107,7 +111,7 @@ class Filter extends Component {
                 <br/>
                 <Button positive onClick={this.filter}>Apply filter</Button>
                 <Button negative onClick={this.reset}>Reset filters</Button>
-            </Segment>
+            </StyledSegment>
         )
     }
 }
